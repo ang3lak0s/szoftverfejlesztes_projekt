@@ -10,7 +10,7 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String locationId;    //osszetett kulcsra lecserélni
+    private String locationId;    //osszetett kulcsra lecserélni??
 
     private String locationName;
 
@@ -28,6 +28,9 @@ public class Location {
 
     private String genrePref;
 
+
+
+    // Getters and setters
     public String getLocationId() {
         return locationId;
     }
