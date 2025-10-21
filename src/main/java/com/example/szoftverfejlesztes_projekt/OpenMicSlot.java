@@ -1,6 +1,8 @@
 package com.example.szoftverfejlesztes_projekt;
 
 import jakarta.persistence.*;
+
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Entity
@@ -75,5 +77,11 @@ public class OpenMicSlot {
 
     public void setBand(Band band) {
         this.band = band;
+    }
+
+    //kell a controllerben a lekérdezéshez hogy a bandának a felvenni kívánt időpontban
+    //van e már korábbi jelentkezése abban az időpontban.
+    public Duration getSlotTime() {
+        return Duration.between(startTime, endTime);
     }
 }

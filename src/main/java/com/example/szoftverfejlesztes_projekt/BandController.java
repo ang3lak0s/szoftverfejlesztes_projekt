@@ -40,15 +40,25 @@ public class BandController {
         bandService.deleteBandById(id);
     }
 
+    //open mic slot booking
     @PostMapping("/openmic/slots/{slotId}/book/{bandId}")
     public ResponseEntity<String> bookSlot(@PathVariable Long slotId, @PathVariable Long bandId) {
         OpenMicSlot slot = openMicSlotRepository.findById(slotId).orElseThrow();
         Band band = bandRepository.findById(bandId).orElseThrow();
 
+        //már le van e foglalva az az idopont
         if (slot.isBooked()) {
             return ResponseEntity.badRequest().body("This slot is already booked!");
         }
 
+        //van e a bandanak akkor az idopontban mar utkozo open mic jelentkezése.
+        boolean hasConflict = openMicSlotRepository.findById(bandId).stream()
+                .anyMatch(s -> s.getSlotTime().equals(slot.getSlotTime()));
+        if (hasConflict) {
+            return ResponseEntity.badRequest().body("This band already has a slot at this time!");
+        }
+
+        //ráment a slotra amikorra jelentkezik a banda
         slot.setBand(band);
         slot.setBooked(true);
         openMicSlotRepository.save(slot);
