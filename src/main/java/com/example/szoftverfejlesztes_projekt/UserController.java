@@ -5,6 +5,8 @@ import com.example.szoftverfejlesztes_projekt.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -18,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping
-    public Iterable<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 

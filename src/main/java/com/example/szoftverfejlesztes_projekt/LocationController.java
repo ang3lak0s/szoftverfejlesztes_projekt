@@ -5,6 +5,8 @@ import com.example.szoftverfejlesztes_projekt.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/locations")
 public class LocationController {
@@ -18,7 +20,7 @@ public class LocationController {
     }
 
     @GetMapping
-    public Iterable<Location> getAllLocations() {
+    public List<Location> getAllLocations() {
         return locationService.getAllLocations();
     }
 

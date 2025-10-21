@@ -5,6 +5,8 @@ import com.example.szoftverfejlesztes_projekt.BandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/bands")
 public class BandController {
@@ -18,7 +20,7 @@ public class BandController {
     }
 
     @GetMapping
-    public Iterable<Band> getAllBands() {
+    public List<Band> getAllBands() {
         return bandService.getAllBands();
     }
 
