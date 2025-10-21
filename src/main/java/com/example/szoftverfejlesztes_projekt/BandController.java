@@ -2,7 +2,9 @@ package com.example.szoftverfejlesztes_projekt;
 
 import com.example.szoftverfejlesztes_projekt.Band;
 import com.example.szoftverfejlesztes_projekt.BandService;
+import com.example.szoftverfejlesztes_projekt.OpenMicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,10 @@ public class BandController {
 
     @Autowired
     private BandService bandService;
+    @Autowired
+    private OpenMicSlotRepository openMicSlotRepository;
+    @Autowired
+    private BandRepository bandRepository;
 
     @PostMapping
     public Band createBand(@RequestBody Band band) {
@@ -32,5 +38,21 @@ public class BandController {
     @DeleteMapping("/{id}")
     public void deleteBandById(@PathVariable Long id) {
         bandService.deleteBandById(id);
+    }
+
+    @PostMapping("/openmic/slots/{slotId}/book/{bandId}")
+    public ResponseEntity<String> bookSlot(@PathVariable Long slotId, @PathVariable Long bandId) {
+        OpenMicSlot slot = openMicSlotRepository.findById(slotId).orElseThrow();
+        Band band = bandRepository.findById(bandId).orElseThrow();
+
+        if (slot.isBooked()) {
+            return ResponseEntity.badRequest().body("This slot is already booked!");
+        }
+
+        slot.setBand(band);
+        slot.setBooked(true);
+        openMicSlotRepository.save(slot);
+
+        return ResponseEntity.ok("Slot successfully booked by " + band.getBandName());
     }
 }
