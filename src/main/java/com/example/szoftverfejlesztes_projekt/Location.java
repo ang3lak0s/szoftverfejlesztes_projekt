@@ -10,7 +10,7 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String locationId;    //osszetett kulcsra lecserélni??
+    private Long locationId;    //osszetett kulcsra lecserélni??
 
     private String locationName;
 
@@ -24,18 +24,26 @@ public class Location {
 
     private boolean rentable;
 
-    private boolean OpenMic;
+    private boolean openMic;
 
     private String genrePref;
 
+    //Constructors
+    public Location() {}
+
+    public Location(String name, String address, String phoneNum) {
+        this.locationName = name;
+        this.address = address;
+        this.phoneNum = phoneNum;
+    }
 
 
     // Getters and setters
-    public String getLocationId() {
+    public Long getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(String locationId) {
+    public void setLocationId(Long locationId) {
         this.locationId = locationId;
     }
 
@@ -80,11 +88,11 @@ public class Location {
     }
 
     public boolean isOpenMic() {
-        return OpenMic;
+        return openMic;
     }
 
     public void setOpenMic(boolean openMic) {
-        OpenMic = openMic;
+        this.openMic = openMic;
     }
 
     public boolean isRentable() {
