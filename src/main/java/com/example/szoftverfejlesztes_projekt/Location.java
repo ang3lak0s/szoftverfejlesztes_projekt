@@ -1,9 +1,8 @@
 package com.example.szoftverfejlesztes_projekt;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Location {
@@ -27,6 +26,10 @@ public class Location {
     private boolean openMic;
 
     private String genrePref;
+
+
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    private List<OpenMicEvent> openMicEvents;
 
     //Constructors
     public Location() {}

@@ -5,6 +5,8 @@ import com.example.szoftverfejlesztes_projekt.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LocationService {
 
@@ -15,7 +17,7 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public Iterable<Location> getAllLocations() {
+    public List<Location> getAllLocations() {
         return locationRepository.findAll();
     }
 
