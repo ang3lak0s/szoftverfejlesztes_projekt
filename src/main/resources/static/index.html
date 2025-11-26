@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Zenekarok Listája</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .band-list { border: 1px solid #ccc; padding: 10px; margin-top: 15px; }
+        .hidden { display: none; }
+        button { padding: 10px 15px; margin-right: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<h1>Zenekarok Kezelése</h1>
+
+<button onclick="showBands()">Zenekarok Megjelenítése</button>
+<button onclick="hideBands()">Zenekarok Elrejtése</button>
+
+<div id="bandContainer" class="band-list hidden">
+    <h2>Elérhető Zenekarok:</h2>
+    <ul id="bandList">
+        <li>Loading...</li>
+    </ul>
+</div>
+
+<script>
+    const bandContainer = document.getElementById('bandContainer');
+    const bandList = document.getElementById('bandList');
+    let bandsLoaded = false; // Flag to check if data is already fetched
+
+    function fetchAndRenderBands() {
+        // Fetch data from the Spring Boot endpoint
+        fetch('/api/bands') // The endpoint we created: /api/bands
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Parse the response body as JSON
+            })
+            .then(bands => {
+                // Clear the loading message
+                bandList.innerHTML = '';
+
+                // Build the list items
+                bands.forEach(band => {
+                    const isHOC = band.bandName === "HOC"; // Check for "HOC" band
+                    const listItem = document.createElement('li');
+
+                    let bandNameHtml = `<strong>${band.bandName}</strong>`;
+                    if (isHOC) {
+                        bandNameHtml += " (legszexibb banda ever)";
+                    }
+
+                    listItem.innerHTML = `ID: ${band.bandId}, Name: ${bandNameHtml}, Genre: ${band.playedGenre}, Rate: ${band.pricePerHour}`;
+
+                    bandList.appendChild(listItem);
+                });
+
+                bandsLoaded = true; // Mark data as loaded
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                bandList.innerHTML = '<li>Hiba történt az adatok lekérdezésekor.</li>';
+            });
+    }
+
+    function showBands() {
+        if (!bandsLoaded) {
+            fetchAndRenderBands(); // Load data on first click
+        }
+        bandContainer.classList.remove('hidden');
+    }
+
+    function hideBands() {
+        bandContainer.classList.add('hidden');
+    }
+</script>
+</body>
+</html>

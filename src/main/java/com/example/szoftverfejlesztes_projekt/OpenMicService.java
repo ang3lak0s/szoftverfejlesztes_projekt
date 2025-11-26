@@ -1,34 +1,40 @@
 package com.example.szoftverfejlesztes_projekt;
 
-import com.example.szoftverfejlesztes_projekt.OpenMicEventRepository;
-import com.example.szoftverfejlesztes_projekt.OpenMicSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
+import java.util.NoSuchElementException;
 
 @Service
 public class OpenMicService {
 
     @Autowired
-    private OpenMicEventRepository  openMicEventRepository;
-
+    private OpenMicSlotRepository openMicSlotRepository;
     @Autowired
-    private OpenMicSlotRepository  openMicSlotRepository;
+    private BandRepository bandRepository;
 
-    public void generateSlotsForEvent(OpenMicEvent event) {
-        LocalDateTime start = event.getStartTime();
-        LocalDateTime end = event.getEndTime();
+    public String bookSlot(Long slotId, Long bandId) {
+        //Keresés és ellenőrzés (NoSuchElementException, ha nem találja)
+        OpenMicSlot slot = openMicSlotRepository.findById(slotId)
+                .orElseThrow(() -> new NoSuchElementException("Slot not found with ID: " + slotId));
 
-        while (start.isBefore(end)) {
-            OpenMicSlot slot = new OpenMicSlot();
-            slot.setStartTime(start);
-            slot.setEndTime(start.plusMinutes(20));
-            slot.setEvent(event);
-            slot.setBooked(false);
-            openMicSlotRepository.save(slot);
+        Band band = bandRepository.findById(bandId)
+                .orElseThrow(() -> new NoSuchElementException("Band not found with ID: " + bandId));
 
-            start = start.plusMinutes(20);
+        //Már le van foglalva?
+        if (slot.isBooked()) {
+            throw new IllegalStateException("This slot is already booked!");
         }
+
+        // Van-e már a bandának lefoglalva más slot ugyanabban az időben?
+        // Ehhez a repository-ban kell lennie egy megfelelő lekérdezésnek!
+
+        // Ideiglenes megoldás: kihagyjuk a konfliktus ellenőrzést
+
+        //Foglalás és mentés
+        slot.setBand(band);
+        slot.setBooked(true);
+        openMicSlotRepository.save(slot);
+
+        return "Slot successfully booked by " + band.getBandName();
     }
 }
