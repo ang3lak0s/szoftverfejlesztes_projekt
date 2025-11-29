@@ -1,5 +1,7 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.repository;
 
+import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
+import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

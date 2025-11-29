@@ -1,6 +1,6 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.repository;
 
-import com.example.szoftverfejlesztes_projekt.Location;
+import com.example.szoftverfejlesztes_projekt.model.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

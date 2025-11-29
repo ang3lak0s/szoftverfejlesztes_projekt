@@ -1,5 +1,9 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.service;
 
+import com.example.szoftverfejlesztes_projekt.model.Band;
+import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
+import com.example.szoftverfejlesztes_projekt.repository.BandRepository;
+import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.NoSuchElementException;

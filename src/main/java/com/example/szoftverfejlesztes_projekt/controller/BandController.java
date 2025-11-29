@@ -1,5 +1,8 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.controller;
 
+import com.example.szoftverfejlesztes_projekt.model.Band;
+import com.example.szoftverfejlesztes_projekt.service.BandService;
+import com.example.szoftverfejlesztes_projekt.service.OpenMicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

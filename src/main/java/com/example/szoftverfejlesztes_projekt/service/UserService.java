@@ -1,7 +1,7 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.service;
 
-import com.example.szoftverfejlesztes_projekt.User;
-import com.example.szoftverfejlesztes_projekt.UserRepository;
+import com.example.szoftverfejlesztes_projekt.model.User;
+import com.example.szoftverfejlesztes_projekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.controller;
 
-import com.example.szoftverfejlesztes_projekt.Location;
-import com.example.szoftverfejlesztes_projekt.LocationService;
+import com.example.szoftverfejlesztes_projekt.model.Location;
+import com.example.szoftverfejlesztes_projekt.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

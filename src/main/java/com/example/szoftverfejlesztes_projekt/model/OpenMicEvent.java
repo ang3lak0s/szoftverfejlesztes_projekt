@@ -1,4 +1,4 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

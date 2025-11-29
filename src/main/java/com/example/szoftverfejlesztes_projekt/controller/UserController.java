@@ -1,7 +1,7 @@
-package com.example.szoftverfejlesztes_projekt;
+package com.example.szoftverfejlesztes_projekt.controller;
 
-import com.example.szoftverfejlesztes_projekt.User;
-import com.example.szoftverfejlesztes_projekt.UserService;
+import com.example.szoftverfejlesztes_projekt.model.User;
+import com.example.szoftverfejlesztes_projekt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
