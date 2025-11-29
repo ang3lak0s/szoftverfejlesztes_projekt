@@ -73,4 +73,17 @@ public class BandController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage()); // HTTP 400 Bad Request
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Band> updateBand(
+            @PathVariable Long id,
+            @RequestBody Band updatedBand) {
+        try {
+            Band saved = bandService.updateBand(id, updatedBand);
+            return ResponseEntity.ok(saved);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
