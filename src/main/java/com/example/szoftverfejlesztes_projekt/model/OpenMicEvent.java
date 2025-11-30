@@ -1,5 +1,6 @@
 package com.example.szoftverfejlesztes_projekt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,7 @@ public class OpenMicEvent {
     private Location location;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<OpenMicSlot> slots; // az időpontokra bontott bejegyzések
 
     //constructor

@@ -1,6 +1,8 @@
 package com.example.szoftverfejlesztes_projekt.controller;
 
+import com.example.szoftverfejlesztes_projekt.model.Location;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
+import com.example.szoftverfejlesztes_projekt.repository.LocationRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
 import com.example.szoftverfejlesztes_projekt.service.OpenMicService;
 
@@ -22,6 +24,9 @@ public class OpenMicEventController {
     @Autowired
     private OpenMicService openMicService;
 
+    @Autowired
+    private LocationRepository locationRepository;
+
     @GetMapping
     public List<OpenMicEvent> getAll() {
         return openMicEventRepository.findAll();
@@ -36,6 +41,7 @@ public class OpenMicEventController {
 
     @PostMapping
     public OpenMicEvent create(@RequestBody OpenMicEvent event) {
+        attachLocation(event);
         return openMicEventRepository.save(event);
     }
 
@@ -45,8 +51,23 @@ public class OpenMicEventController {
             @RequestBody OpenMicEvent updated) {
 
         try {
-            OpenMicEvent saved = openMicService.updateEvent(id, updated);
-            return ResponseEntity.ok(saved);
+            return openMicEventRepository.findById(id)
+                    .map(existing -> {
+                        existing.setStartTime(updated.getStartTime());
+                        existing.setEndTime(updated.getEndTime());
+                        // location frissítése
+                        if (updated.getLocation() != null &&
+                                updated.getLocation().getLocationId() != null) {
+                            Location loc = locationRepository
+                                    .findById(updated.getLocation().getLocationId())
+                                    .orElseThrow();
+                            existing.setLocation(loc);
+                        } else {
+                            existing.setLocation(null);
+                        }
+                        return ResponseEntity.ok(openMicEventRepository.save(existing));
+                    })
+                    .orElse(ResponseEntity.notFound().build());
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
@@ -60,4 +81,18 @@ public class OpenMicEventController {
         openMicEventRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    private void attachLocation(OpenMicEvent event) {
+        if (event.getLocation() != null &&
+                event.getLocation().getLocationId() != null) {
+
+            Location loc = locationRepository
+                    .findById(event.getLocation().getLocationId())
+                    .orElseThrow();
+            event.setLocation(loc);
+        } else {
+            event.setLocation(null);
+        }
+    }
+
 }

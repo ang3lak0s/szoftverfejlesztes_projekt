@@ -10,6 +10,7 @@ export default function OpenMicSlotCrud({ onBack }) {
     startTime: "",
     endTime: "",
     booked: false,
+    eventId: "",
   });
 
   const isEdit = form.id !== null;
@@ -17,9 +18,11 @@ export default function OpenMicSlotCrud({ onBack }) {
   const loadSlots = async () => {
     try {
       setLoading(true);
+      setError("");
       const res = await fetch("/api/slots");
       if (!res.ok) throw new Error("Nem sikerült lekérni a slotokat");
-      setSlots(await res.json());
+      const data = await res.json();
+      setSlots(data);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -48,6 +51,9 @@ export default function OpenMicSlotCrud({ onBack }) {
       startTime: form.startTime,
       endTime: form.endTime,
       booked: form.booked,
+      event: form.eventId
+        ? { id: Number(form.eventId) }
+        : null,
     };
 
     const url = isEdit ? `/api/slots/${form.id}` : "/api/slots";
@@ -61,7 +67,13 @@ export default function OpenMicSlotCrud({ onBack }) {
       });
       if (!res.ok) throw new Error("Sikertelen mentés");
       await loadSlots();
-      setForm({ id: null, startTime: "", endTime: "", booked: false });
+      setForm({
+        id: null,
+        startTime: "",
+        endTime: "",
+        booked: false,
+        eventId: "",
+      });
     } catch (e) {
       setError(e.message);
     } finally {
@@ -75,6 +87,7 @@ export default function OpenMicSlotCrud({ onBack }) {
       startTime: slot.startTime || "",
       endTime: slot.endTime || "",
       booked: slot.booked ?? false,
+      eventId: slot.event?.id || "", // ⬅ ha a backend küldi vissza az eventet
     });
   };
 
@@ -85,7 +98,13 @@ export default function OpenMicSlotCrud({ onBack }) {
   };
 
   const handleCancel = () => {
-    setForm({ id: null, startTime: "", endTime: "", booked: false });
+    setForm({
+      id: null,
+      startTime: "",
+      endTime: "",
+      booked: false,
+      eventId: "",
+    });
   };
 
   return (
@@ -104,6 +123,8 @@ export default function OpenMicSlotCrud({ onBack }) {
             <th>Kezdés</th>
             <th>Befejezés</th>
             <th>Foglalt?</th>
+            <th>Event ID</th>
+            <th>Helyszín</th>
             <th>Műveletek</th>
           </tr>
         </thead>
@@ -114,6 +135,12 @@ export default function OpenMicSlotCrud({ onBack }) {
               <td>{s.startTime}</td>
               <td>{s.endTime}</td>
               <td>{s.booked ? "Igen" : "Nem"}</td>
+              <td>{s.event ? s.event.id : "-"}</td>
+              <td>
+                {s.event && s.event.location
+                  ? s.event.location.locationName
+                  : "-"}
+              </td>
               <td>
                 <button onClick={() => handleEdit(s)}>Szerkesztés</button>{" "}
                 <button onClick={() => handleDelete(s.id)}>Törlés</button>
@@ -157,6 +184,17 @@ export default function OpenMicSlotCrud({ onBack }) {
             name="booked"
             checked={form.booked}
             onChange={handleChange}
+          />
+        </label>
+
+        <label>
+          Event ID:
+          <input
+            type="number"
+            name="eventId"
+            value={form.eventId}
+            onChange={handleChange}
+            placeholder="kapcsolódó event ID"
           />
         </label>
 

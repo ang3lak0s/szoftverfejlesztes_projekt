@@ -4,11 +4,13 @@ import com.example.szoftverfejlesztes_projekt.model.Band;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
 import com.example.szoftverfejlesztes_projekt.repository.BandRepository;
+import com.example.szoftverfejlesztes_projekt.repository.LocationRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.NoSuchElementException;
+import com.example.szoftverfejlesztes_projekt.model.Location;
 
 @Service
 public class OpenMicService {
@@ -19,6 +21,8 @@ public class OpenMicService {
     private BandRepository bandRepository;
     @Autowired
     private OpenMicEventRepository openMicEventRepository;
+    @Autowired
+    private LocationRepository locationRepository;
 
     public String bookSlot(Long slotId, Long bandId) {
         //Keresés és ellenőrzés (NoSuchElementException, ha nem találja)
@@ -51,7 +55,19 @@ public class OpenMicService {
 
             event.setStartTime(updated.getStartTime());
             event.setEndTime(updated.getEndTime());
-            event.setLocation(updated.getLocation());
+            if (updated.getLocation() != null &&
+                    updated.getLocation().getLocationId() != null) {
+
+                Location loc = locationRepository
+                        .findById(updated.getLocation().getLocationId())
+                        .orElseThrow(() ->
+                                new NoSuchElementException("Location not found with id "
+                                        + updated.getLocation().getLocationId()));
+
+                event.setLocation(loc);
+            } else {
+                event.setLocation(null);
+            }
 
             return openMicEventRepository.save(event);
 

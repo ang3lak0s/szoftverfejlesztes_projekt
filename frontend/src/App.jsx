@@ -8,14 +8,12 @@ import BandList from "./BandList";
 import LocationList from "./LocationList";
 import FullBandList from "./FullBandList";
 import BandClientPage from "./BandClientPage";
+import LocationClientPage from "./LocationClientPage";
 
 export default function App() {
-  // külső szint: main page vs admin felület
   const [mode, setMode] = useState("main");
-  // belső szint: adminon belüli nézet
   const [view, setView] = useState("home");
 
-  // 1) MAIN PAGE – 3 gomb: banda / helyszín / admin
   if (mode === "main") {
     return (
       <div
@@ -27,7 +25,6 @@ export default function App() {
           flexDirection: "column",
         }}
       >
-        {/* Felső sáv – logó helye, belépés */}
         <header
           style={{
             display: "flex",
@@ -42,7 +39,6 @@ export default function App() {
           </div>
         </header>
 
-        {/* Középső rész – hype szöveg, vicc, stb. */}
         <main
           style={{
             flex: 1,
@@ -59,15 +55,14 @@ export default function App() {
             <h1>Zenekar–Helyszín Rendszer</h1>
             <p>
               Tipikus kis hype szöveg, hogy mennyire jó ez az alkalmazás,
-              annak ellenére, hogy mindenki tudja, hogy ez egy iskolai projekt. 😄
+              annak ellenére, hogy örülünk, ha csütörtökön megjelenik valami a képernyőn.
             </p>
             <p style={{ marginTop: "16px", fontStyle: "italic" }}>
-              „Ezt az alkalmazást annak a fejlesztőnek ajánljuk, aki meghalt a
-              projekt során (nem halt meg, csak lusta volt).”
+              „Ezt az alkalmazást Arnóczki Áron emlékére fejlesztettük, szívünkben
+              örökké él (Fel kéne tolni valamit Githubra főnök!).”
             </p>
           </div>
 
-          {/* 3 nagy gomb */}
           <div style={{ display: "flex", gap: "16px", marginTop: "24px" }}>
             <button
               onClick={() => setMode("band")}
@@ -93,7 +88,6 @@ export default function App() {
           </div>
         </main>
 
-        {/* Alsó sáv – közelgő események placeholder */}
         <footer
           style={{
             borderTop: "1px solid #333",
@@ -113,18 +107,9 @@ export default function App() {
 
 
   if (mode === "location") {
-    return (
-      <div style={{ padding: 20 }}>
-        <button onClick={() => setMode("main")}>← Vissza a főoldalra</button>
-        <h1>Helyszín felület (fejlesztés alatt)</h1>
-        <p>Itt majd a helyszín a saját eseményeit, foglalásait kezeli.</p>
-      </div>
-    );
+    return <LocationClientPage onBack={() => setMode("main")} />;
   }
 
-  // 3) ADMIN MÓD – ide jön a mostani layoutod (második kép)
-
-  // admin "home" – a jelenlegi kezdőképernyőd gombokkal
   if (mode === "admin" && view === "home") {
     return (
       <div
@@ -172,7 +157,6 @@ export default function App() {
     );
   }
 
-  // innen lefelé ugyanúgy, ahogy eddig: a CRUD oldalak
   if (mode === "admin" && view === "bandCrud") {
     return <BandCrud onBack={() => setView("home")} />;
   }

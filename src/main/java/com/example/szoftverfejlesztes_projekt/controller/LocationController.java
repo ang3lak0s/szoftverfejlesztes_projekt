@@ -1,6 +1,8 @@
 package com.example.szoftverfejlesztes_projekt.controller;
 
 import com.example.szoftverfejlesztes_projekt.model.Location;
+import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
+import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
 import com.example.szoftverfejlesztes_projekt.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ public class LocationController {
 
     @Autowired
     private LocationService locationService;
+
+    @Autowired
+    private OpenMicSlotRepository openMicSlotRepository;
 
     @PostMapping
     public Location createLocation(@RequestBody Location location) {
@@ -46,6 +51,11 @@ public class LocationController {
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/{id}/slots")
+    public List<OpenMicSlot> getSlotsForLocation(@PathVariable Long id) {
+        return openMicSlotRepository.findByEventLocationLocationId(id);
     }
 
 }

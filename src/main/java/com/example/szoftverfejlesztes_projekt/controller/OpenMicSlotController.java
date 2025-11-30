@@ -1,6 +1,8 @@
 package com.example.szoftverfejlesztes_projekt.controller;
 
+import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
+import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class OpenMicSlotController {
     @Autowired
     private OpenMicSlotRepository openMicSlotRepository;
 
+    @Autowired
+    private OpenMicEventRepository openMicEventRepository;
+
     @GetMapping
     public List<OpenMicSlot> getAll() {
         return openMicSlotRepository.findAll();
@@ -31,7 +36,8 @@ public class OpenMicSlotController {
 
     @PostMapping
     public OpenMicSlot create(@RequestBody OpenMicSlot slot) {
-        // event/band most maradhat null
+        attachEvent(slot);
+        // band-et itt direkt NEM piszkáljuk, azt a foglalási logika kezeli
         return openMicSlotRepository.save(slot);
     }
 
@@ -46,7 +52,16 @@ public class OpenMicSlotController {
                         slot.setStartTime(updated.getStartTime());
                         slot.setEndTime(updated.getEndTime());
                         slot.setBooked(updated.isBooked());
-                        // event / band később, ha akarjuk
+                        // event összekötése
+                        if (updated.getEvent() != null && updated.getEvent().getId() != null) {
+                            OpenMicEvent ev = openMicEventRepository
+                                    .findById(updated.getEvent().getId())
+                                    .orElseThrow();
+                            slot.setEvent(ev);
+                        } else {
+                            slot.setEvent(null);
+                        }
+                        // band-et továbbra sem módosítjuk itt
                         return openMicSlotRepository.save(slot);
                     })
                     .orElseThrow(() -> new NoSuchElementException("Slot not found"));
@@ -63,5 +78,16 @@ public class OpenMicSlotController {
         }
         openMicSlotRepository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private void attachEvent(OpenMicSlot slot) {
+        if (slot.getEvent() != null && slot.getEvent().getId() != null) {
+            OpenMicEvent ev = openMicEventRepository
+                    .findById(slot.getEvent().getId())
+                    .orElseThrow();
+            slot.setEvent(ev);
+        } else {
+            slot.setEvent(null);
+        }
     }
 }
