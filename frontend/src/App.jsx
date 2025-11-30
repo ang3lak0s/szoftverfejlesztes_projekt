@@ -4,182 +4,206 @@ import LocationCrud from "./LocationCrud";
 import UserCrud from "./UserCrud";
 import OpenMicEventCrud from "./OpenMicEventCrud";
 import OpenMicSlotCrud from "./OpenMicSlotCrud";
+import BandList from "./BandList";
+import LocationList from "./LocationList";
+import FullBandList from "./FullBandList";
+import BandClientPage from "./BandClientPage";
 
-function App() {
+export default function App() {
+  // külső szint: main page vs admin felület
+  const [mode, setMode] = useState("main");
+  // belső szint: adminon belüli nézet
   const [view, setView] = useState("home");
-  const [bands, setBands] = useState([]);
-  const [locations, setLocations] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
-  const loadBands = async () => {
-    try {
-      setError("");
-      setLoading(true);
-      const res = await fetch("/api/bands");
-      if (!res.ok) {
-        throw new Error("Meghalt az összes banda, Isten nyugasztalja, temetés jövőhét kedden, 14 órakor");
-      }
-      const data = await res.json();
-      setBands(data);
-      setView("bands");
-    } catch (err) {
-      setError(err.message || "Valami félrement kisöreg");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadLocations = async () => {
-    try {
-      setError("");
-      setLoading(true);
-      const res = await fetch("/api/locations");
-      if (!res.ok) {
-        throw new Error("Felrobbant az összes helyszín, a feléért kár, a többinek meg hamarabb kellett volna");
-      }
-      const data = await res.json();
-      setLocations(data);
-      setView("locations");
-    } catch (err) {
-      setError(err.message || "Valami félrement kisöreg");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const loadFullBands = async () => {
-    try {
-      setError("");
-      setLoading(true);
-      const res = await fetch("/api/bands");
-      if (!res.ok) {
-        throw new Error("Nem sikerült lekérni a bandákat, mert nem léteznek, ez mind csak a fejedben történt");
-      }
-      const data = await res.json();
-      setBands(data);
-      setView("fullBands");
-    } catch (err) {
-      setError(err.message || "Vedd be a gyógyszereidet skizokám, a nővérek már úton vannak");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-  const goHome = () => {
-    setView("home");
-    setError("");
-  };
-
-  if (view === "bands") {
+  // 1) MAIN PAGE – 3 gomb: banda / helyszín / admin
+  if (mode === "main") {
     return (
-      <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
-        <button onClick={goHome}>← Vissza</button>
-        <h1>Bandák</h1>
-        {loading && <p>Betöltés…</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <ul>
-          {bands.map((band) => (
-            <li key={band.bandId}>{band.bandName}</li>
-          ))}
-        </ul>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "#111",
+          color: "white",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {/* Felső sáv – logó helye, belépés */}
+        <header
+          style={{
+            display: "flex",
+            borderBottom: "1px solid #333",
+            padding: "16px",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ marginRight: "16px", fontWeight: "bold" }}>Belépés</div>
+          <div style={{ flex: 1, textAlign: "center", fontSize: "24px" }}>
+            Logó helye
+          </div>
+        </header>
+
+        {/* Középső rész – hype szöveg, vicc, stb. */}
+        <main
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "24px",
+            padding: "24px",
+            textAlign: "center",
+          }}
+        >
+          <div>
+            <h1>Zenekar–Helyszín Rendszer</h1>
+            <p>
+              Tipikus kis hype szöveg, hogy mennyire jó ez az alkalmazás,
+              annak ellenére, hogy mindenki tudja, hogy ez egy iskolai projekt. 😄
+            </p>
+            <p style={{ marginTop: "16px", fontStyle: "italic" }}>
+              „Ezt az alkalmazást annak a fejlesztőnek ajánljuk, aki meghalt a
+              projekt során (nem halt meg, csak lusta volt).”
+            </p>
+          </div>
+
+          {/* 3 nagy gomb */}
+          <div style={{ display: "flex", gap: "16px", marginTop: "24px" }}>
+            <button
+              onClick={() => setMode("band")}
+              style={{ padding: "12px 24px", borderRadius: "8px" }}
+            >
+              Banda vagyok
+            </button>
+            <button
+              onClick={() => setMode("location")}
+              style={{ padding: "12px 24px", borderRadius: "8px" }}
+            >
+              Helyszín vagyok
+            </button>
+            <button
+              onClick={() => {
+                setMode("admin");
+                setView("home");
+              }}
+              style={{ padding: "12px 24px", borderRadius: "8px" }}
+            >
+              Admin vagyok
+            </button>
+          </div>
+        </main>
+
+        {/* Alsó sáv – közelgő események placeholder */}
+        <footer
+          style={{
+            borderTop: "1px solid #333",
+            padding: "16px",
+            textAlign: "center",
+          }}
+        >
+          Közelgő események / valami hasonló helye
+        </footer>
       </div>
     );
   }
 
-  if (view === "locations") {
+  if (mode === "band") {
+    return <BandClientPage onBack={() => setMode("main")} />;
+  }
+
+
+  if (mode === "location") {
     return (
-      <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
-        <button onClick={goHome}>Vissza</button>
-        <h1>Helyszínek</h1>
-        {loading && <p>Betöltés…</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <ul>
-          {locations.map((loc) => (
-            <li key={loc.locationId}>{loc.locationName}</li>
-          ))}
-        </ul>
+      <div style={{ padding: 20 }}>
+        <button onClick={() => setMode("main")}>← Vissza a főoldalra</button>
+        <h1>Helyszín felület (fejlesztés alatt)</h1>
+        <p>Itt majd a helyszín a saját eseményeit, foglalásait kezeli.</p>
       </div>
     );
   }
 
-  if (view === "fullBands") {
-    return (
-      <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
-        <button onClick={goHome}>← Vissza</button>
-        <h1>Bandák – teljes adatok</h1>
-        {loading && <p>Betöltés…</p>}
-        {error && <p style={{ color: "red" }}>{error}</p>}
+  // 3) ADMIN MÓD – ide jön a mostani layoutod (második kép)
 
-        <table border="1" cellPadding="8" style={{ marginTop: "10px" }}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Név</th>
-              <th>Műfaj</th>
-              <th>Telefon</th>
-              <th>E-mail</th>
-              <th>Ár / óra</th>
-              <th>Elfogad %-ot?</th>
-              <th>Műveletek</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bands.map((b) => (
-              <tr key={b.bandId}>
-                <td>{b.bandId}</td>
-                <td>{b.bandName}</td>
-                <td>{b.playedGenre}</td>
-                <td>{b.phoneNum}</td>
-                <td>{b.email}</td>
-                <td>{b.pricePerHour}</td>
-                <td>{b.acceptsPercentage}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+  // admin "home" – a jelenlegi kezdőképernyőd gombokkal
+  if (mode === "admin" && view === "home") {
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          background: "#111",
+          color: "white",
+          padding: "24px",
+        }}
+      >
+        <button
+          onClick={() => setMode("main")}
+          style={{ marginBottom: "16px" }}
+        >
+          ← Kilépés az admin felületről
+        </button>
+
+        <h1 style={{ fontSize: "48px", marginBottom: "16px" }}>
+          Zenekar–Helyszín rendszer
+        </h1>
+
+        <p style={{ marginBottom: "16px" }}>Melyik pirulát választod?</p>
+
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <button onClick={() => setView("bands")}>Bandák listázása</button>
+          <button onClick={() => setView("locations")}>
+            Helyszínek listázása
+          </button>
+          <button onClick={() => setView("fullBands")}>
+            Bandák (teljes adatok)
+          </button>
+          <button onClick={() => setView("bandCrud")}>Bandák CRUD</button>
+          <button onClick={() => setView("locationCrud")}>
+            Helyszínek CRUD
+          </button>
+          <button onClick={() => setView("userCrud")}>Userek CRUD</button>
+          <button onClick={() => setView("eventCrud")}>
+            Open Mic Event CRUD
+          </button>
+          <button onClick={() => setView("slotCrud")}>
+            Open Mic Slot CRUD
+          </button>
+        </div>
       </div>
     );
   }
 
-  if (view === "bandCrud") {
+  // innen lefelé ugyanúgy, ahogy eddig: a CRUD oldalak
+  if (mode === "admin" && view === "bandCrud") {
     return <BandCrud onBack={() => setView("home")} />;
   }
 
-  if (view === "locationCrud") {
+  if (mode === "admin" && view === "locationCrud") {
     return <LocationCrud onBack={() => setView("home")} />;
   }
 
-  if (view === "userCrud") {
+  if (mode === "admin" && view === "userCrud") {
     return <UserCrud onBack={() => setView("home")} />;
   }
 
-  if (view === "openMicCrud") {
+  if (mode === "admin" && view === "eventCrud") {
     return <OpenMicEventCrud onBack={() => setView("home")} />;
   }
 
-  if (view === "slotCrud") {
+  if (mode === "admin" && view === "slotCrud") {
     return <OpenMicSlotCrud onBack={() => setView("home")} />;
   }
 
-  return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
-      <h1>Zenekar–Helyszín rendszer</h1>
-      <p>Melyik pirulát választod?:</p>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-        <button onClick={loadBands}>Bandák listázása</button>
-        <button onClick={loadLocations}>Helyszínek listázása</button>
-        <button onClick={loadFullBands}>Bandák (teljes adatok)</button>
-        <button onClick={() => setView("bandCrud")}>Bandák CRUD</button>
-        <button onClick={() => setView("locationCrud")}>Helyszínek CRUD</button>
-        <button onClick={() => setView("userCrud")}>Userek CRUD</button>
-        <button onClick={() => setView("openMicCrud")}>Open Mic Event CRUD</button>
-        <button onClick={() => setView("slotCrud")}>Open Mic Slot CRUD</button>
-      </div>
-    </div>
-  );
-}
+  if (mode === "admin" && view === "bands") {
+    return <BandList />;
+  }
 
-export default App;
+  if (mode === "admin" && view === "locations") {
+    return <LocationList />;
+  }
+
+  if (mode === "admin" && view === "fullBands") {
+    return <FullBandList />;
+  }
+
+  return <div>A hívott szám jelenleg nem elérhető, üzenetét hagyja meg a sípszó után *pííííp*</div>;
+}
