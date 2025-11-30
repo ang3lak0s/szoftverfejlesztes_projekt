@@ -1,5 +1,9 @@
 import { useState } from "react";
 import BandCrud from "./BandCrud";
+import LocationCrud from "./LocationCrud";
+import UserCrud from "./UserCrud";
+import OpenMicEventCrud from "./OpenMicEventCrud";
+import OpenMicSlotCrud from "./OpenMicSlotCrud";
 
 function App() {
   const [view, setView] = useState("home");
@@ -50,13 +54,13 @@ function App() {
       setLoading(true);
       const res = await fetch("/api/bands");
       if (!res.ok) {
-        throw new Error("Nem sikerült lekérni a bandákat");
+        throw new Error("Nem sikerült lekérni a bandákat, mert nem léteznek, ez mind csak a fejedben történt");
       }
       const data = await res.json();
       setBands(data);
       setView("fullBands");
     } catch (err) {
-      setError(err.message || "Ismeretlen hiba történt");
+      setError(err.message || "Vedd be a gyógyszereidet skizokám, a nővérek már úton vannak");
     } finally {
       setLoading(false);
     }
@@ -143,6 +147,22 @@ function App() {
     return <BandCrud onBack={() => setView("home")} />;
   }
 
+  if (view === "locationCrud") {
+    return <LocationCrud onBack={() => setView("home")} />;
+  }
+
+  if (view === "userCrud") {
+    return <UserCrud onBack={() => setView("home")} />;
+  }
+
+  if (view === "openMicCrud") {
+    return <OpenMicEventCrud onBack={() => setView("home")} />;
+  }
+
+  if (view === "slotCrud") {
+    return <OpenMicSlotCrud onBack={() => setView("home")} />;
+  }
+
   return (
     <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
       <h1>Zenekar–Helyszín rendszer</h1>
@@ -153,6 +173,10 @@ function App() {
         <button onClick={loadLocations}>Helyszínek listázása</button>
         <button onClick={loadFullBands}>Bandák (teljes adatok)</button>
         <button onClick={() => setView("bandCrud")}>Bandák CRUD</button>
+        <button onClick={() => setView("locationCrud")}>Helyszínek CRUD</button>
+        <button onClick={() => setView("userCrud")}>Userek CRUD</button>
+        <button onClick={() => setView("openMicCrud")}>Open Mic Event CRUD</button>
+        <button onClick={() => setView("slotCrud")}>Open Mic Slot CRUD</button>
       </div>
     </div>
   );

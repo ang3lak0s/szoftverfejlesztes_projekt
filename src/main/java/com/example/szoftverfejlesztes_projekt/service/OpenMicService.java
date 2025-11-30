@@ -1,9 +1,11 @@
 package com.example.szoftverfejlesztes_projekt.service;
 
 import com.example.szoftverfejlesztes_projekt.model.Band;
+import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
 import com.example.szoftverfejlesztes_projekt.repository.BandRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
+import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.NoSuchElementException;
@@ -15,6 +17,8 @@ public class OpenMicService {
     private OpenMicSlotRepository openMicSlotRepository;
     @Autowired
     private BandRepository bandRepository;
+    @Autowired
+    private OpenMicEventRepository openMicEventRepository;
 
     public String bookSlot(Long slotId, Long bandId) {
         //Keresés és ellenőrzés (NoSuchElementException, ha nem találja)
@@ -41,4 +45,17 @@ public class OpenMicService {
 
         return "Slot successfully booked by " + band.getBandName();
     }
+
+    public OpenMicEvent updateEvent(Long id, OpenMicEvent updated) {
+        return openMicEventRepository.findById(id).map(event -> {
+
+            event.setStartTime(updated.getStartTime());
+            event.setEndTime(updated.getEndTime());
+            event.setLocation(updated.getLocation());
+
+            return openMicEventRepository.save(event);
+
+        }).orElseThrow(() -> new NoSuchElementException("Event not found with id " + id));
+    }
+
 }

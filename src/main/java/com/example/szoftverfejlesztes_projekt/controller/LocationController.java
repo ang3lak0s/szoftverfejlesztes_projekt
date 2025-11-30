@@ -4,8 +4,10 @@ import com.example.szoftverfejlesztes_projekt.model.Location;
 import com.example.szoftverfejlesztes_projekt.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/locations")
@@ -32,6 +34,18 @@ public class LocationController {
     @DeleteMapping("/{id}")
     public void deleteLocationById(@PathVariable Long id) {
         locationService.deleteLocationById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Location> updateLocation(
+            @PathVariable Long id,
+            @RequestBody Location updatedLocation) {
+        try {
+            Location saved = locationService.updateLocation(id, updatedLocation);
+            return ResponseEntity.ok(saved);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
