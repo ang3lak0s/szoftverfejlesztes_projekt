@@ -9,10 +9,61 @@ import LocationList from "./LocationList";
 import FullBandList from "./FullBandList";
 import BandClientPage from "./BandClientPage";
 import LocationClientPage from "./LocationClientPage";
+import RegisterPage from "./RegisterPage";
+import LoginPage from "./LoginPage";
 
 export default function App() {
   const [mode, setMode] = useState("main");
   const [view, setView] = useState("home");
+  const [authView, setAuthView] = useState("none");
+
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setMode("main");
+    setView("home");
+    setAuthView("none");
+  };
+
+  const handleLoginSuccess = (user) => {
+    setCurrentUser(user);
+    setAuthView("none");
+
+    if (user.role === "BAND") {
+      setMode("band");
+    } else if (user.role === "LOCATION") {
+      setMode("location");
+    } else if (user.role === "ADMIN") {
+      setMode("admin");
+      setView("home");
+    } else {
+      setMode("main");
+    }
+  };
+
+  if (currentUser) {
+    if (currentUser.role === "BAND") {
+      return (
+        <BandClientPage
+          onBack={handleLogout}
+          band={currentUser.band}
+          user={currentUser}
+        />
+      );
+    }
+    if (currentUser.role === "LOCATION") {
+      return (
+        <LocationClientPage
+        onBack={handleLogout}
+        location={currentUser.location}
+        user={currentUser}
+        />
+      );
+    }
+    if (currentUser.role === "ADMIN") {
+    }
+  }
 
   if (mode === "main") {
     return (
@@ -31,11 +82,18 @@ export default function App() {
             borderBottom: "1px solid #333",
             padding: "16px",
             alignItems: "center",
+            gap: "16px",
           }}
         >
-          <div style={{ marginRight: "16px", fontWeight: "bold" }}>Belépés</div>
+          <div style={{ fontWeight: "bold" }}>Belépés</div>
+
           <div style={{ flex: 1, textAlign: "center", fontSize: "24px" }}>
             Logó helye
+          </div>
+
+          <div style={{ display: "flex", gap: "8px" }}>
+            <button onClick={() => setAuthView("login")}>Belépés</button>
+            <button onClick={() => setAuthView("register")}>Regisztráció</button>
           </div>
         </header>
 
@@ -51,41 +109,63 @@ export default function App() {
             textAlign: "center",
           }}
         >
-          <div>
-            <h1>Zenekar–Helyszín Rendszer</h1>
-            <p>
-              Tipikus kis hype szöveg, hogy mennyire jó ez az alkalmazás,
-              annak ellenére, hogy örülünk, ha csütörtökön megjelenik valami a képernyőn.
-            </p>
-            <p style={{ marginTop: "16px", fontStyle: "italic" }}>
-              „Ezt az alkalmazást Arnóczki Áron emlékére fejlesztettük, szívünkben
-              örökké él (Fel kéne tolni valamit Githubra főnök!).”
-            </p>
-          </div>
+          {authView === "login" && (
+            <LoginPage
+              onLogin={handleLoginSuccess}
+              onBack={() => setAuthView("none")}
+            />
+          )}
 
-          <div style={{ display: "flex", gap: "16px", marginTop: "24px" }}>
-            <button
-              onClick={() => setMode("band")}
-              style={{ padding: "12px 24px", borderRadius: "8px" }}
-            >
-              Banda vagyok
-            </button>
-            <button
-              onClick={() => setMode("location")}
-              style={{ padding: "12px 24px", borderRadius: "8px" }}
-            >
-              Helyszín vagyok
-            </button>
-            <button
-              onClick={() => {
-                setMode("admin");
-                setView("home");
-              }}
-              style={{ padding: "12px 24px", borderRadius: "8px" }}
-            >
-              Admin vagyok
-            </button>
-          </div>
+          {authView === "register" && (
+            <RegisterPage
+              onRegistered={null}
+              onBack={() => setAuthView("none")}
+            />
+          )}
+
+          {authView === "none" && (
+            <>
+              <div>
+                <h1>Zenekar–Helyszín Rendszer</h1>
+                <p>
+                  Tipikus kis hype szöveg, hogy mennyire jó ez az alkalmazás,
+                  annak ellenére, hogy örülünk, ha csütörtökön megjelenik
+                  valami a képernyőn.
+                </p>
+                <p style={{ marginTop: "16px", fontStyle: "italic" }}>
+                  „Ezt az alkalmazást Arnóczki Áron emlékére fejlesztettük,
+                  szívünkben örökké él (Fel kéne tolni valamit Githubra
+                  főnök!).”
+                </p>
+              </div>
+
+              <div
+                style={{ display: "flex", gap: "16px", marginTop: "24px" }}
+              >
+                <button
+                  onClick={() => setMode("band")}
+                  style={{ padding: "12px 24px", borderRadius: "8px" }}
+                >
+                  Banda vagyok
+                </button>
+                <button
+                  onClick={() => setMode("location")}
+                  style={{ padding: "12px 24px", borderRadius: "8px" }}
+                >
+                  Helyszín vagyok
+                </button>
+                <button
+                  onClick={() => {
+                    setMode("admin");
+                    setView("home");
+                  }}
+                  style={{ padding: "12px 24px", borderRadius: "8px" }}
+                >
+                  Admin vagyok
+                </button>
+              </div>
+            </>
+          )}
         </main>
 
         <footer
@@ -105,7 +185,6 @@ export default function App() {
     return <BandClientPage onBack={() => setMode("main")} />;
   }
 
-
   if (mode === "location") {
     return <LocationClientPage onBack={() => setMode("main")} />;
   }
@@ -121,7 +200,7 @@ export default function App() {
         }}
       >
         <button
-          onClick={() => setMode("main")}
+          onClick={handleLogout}
           style={{ marginBottom: "16px" }}
         >
           ← Kilépés az admin felületről
@@ -189,5 +268,10 @@ export default function App() {
     return <FullBandList />;
   }
 
-  return <div>A hívott szám jelenleg nem elérhető, üzenetét hagyja meg a sípszó után *pííííp*</div>;
+  return (
+    <div>
+      A hívott szám jelenleg nem elérhető, üzenetét hagyja meg a sípszó után
+      *pííííp*
+    </div>
+  );
 }

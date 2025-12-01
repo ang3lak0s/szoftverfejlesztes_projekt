@@ -5,6 +5,8 @@ import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
 import com.example.szoftverfejlesztes_projekt.repository.LocationRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
 import com.example.szoftverfejlesztes_projekt.service.OpenMicService;
+import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
+import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class OpenMicEventController {
     @Autowired
     private LocationRepository locationRepository;
 
+    @Autowired
+    private OpenMicSlotRepository openMicSlotRepository;
+
     @GetMapping
     public List<OpenMicEvent> getAll() {
         return openMicEventRepository.findAll();
@@ -42,7 +47,17 @@ public class OpenMicEventController {
     @PostMapping
     public OpenMicEvent create(@RequestBody OpenMicEvent event) {
         attachLocation(event);
-        return openMicEventRepository.save(event);
+
+        OpenMicEvent savedEvent = openMicEventRepository.save(event);
+
+        OpenMicSlot slot = new OpenMicSlot();
+        slot.setStartTime(savedEvent.getStartTime());
+        slot.setEndTime(savedEvent.getEndTime());
+        slot.setBooked(false);
+        slot.setEvent(savedEvent);
+        openMicSlotRepository.save(slot);
+
+        return savedEvent;
     }
 
     @PutMapping("/{id}")
@@ -55,7 +70,6 @@ public class OpenMicEventController {
                     .map(existing -> {
                         existing.setStartTime(updated.getStartTime());
                         existing.setEndTime(updated.getEndTime());
-                        // location frissítése
                         if (updated.getLocation() != null &&
                                 updated.getLocation().getLocationId() != null) {
                             Location loc = locationRepository

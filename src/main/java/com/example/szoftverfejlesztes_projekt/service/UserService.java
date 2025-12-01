@@ -1,6 +1,8 @@
 package com.example.szoftverfejlesztes_projekt.service;
 
 import com.example.szoftverfejlesztes_projekt.model.User;
+import com.example.szoftverfejlesztes_projekt.repository.BandRepository;
+import com.example.szoftverfejlesztes_projekt.repository.LocationRepository;
 import com.example.szoftverfejlesztes_projekt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BandRepository bandRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
+
     public User saveUser(User user) {
+        attachRelations(user);
         return userRepository.save(user);
     }
 
@@ -31,11 +40,40 @@ public class UserService {
     }
 
     public User updateUser(Long id, User updated) {
-        return userRepository.findById(id).map(user -> {
-            user.setName(updated.getName());
-            user.setEmail(updated.getEmail());
-            return userRepository.save(user);
-        }).orElseThrow(() ->
-                new NoSuchElementException("Megjegyzés: ha mégegyszer valaki előre lefoglalt nevet próbál használni, pontokat veszünk el tőle értékelésnél " + id));
+        return userRepository.findById(id)
+                .map(existing -> {
+                    existing.setName(updated.getName());
+                    existing.setPassword(updated.getPassword());
+                    existing.setRole(updated.getRole());
+
+                    existing.setBand(updated.getBand());
+                    existing.setLocation(updated.getLocation());
+
+                    attachRelations(existing);
+                    return userRepository.save(existing);
+                })
+                .orElseThrow(() -> new NoSuchElementException("Sajnos nem létezel, így jártál"));
     }
+
+    private void attachRelations(User user) {
+
+        if (user.getBand() != null && user.getBand().getBandId() != null) {
+            var band = bandRepository.findById(user.getBand().getBandId())
+                    .orElseThrow(() -> new NoSuchElementException("A Bandád feloszlott, keress másik állást"));
+            user.setBand(band);
+        } else {
+            user.setBand(null);
+        }
+
+        if (user.getLocation() != null && user.getLocation().getLocationId() != null) {
+            var loc = locationRepository.findById(user.getLocation().getLocationId())
+                    .orElseThrow(() -> new NoSuchElementException("A helyszín már nem helyszín sajnos"));
+            user.setLocation(loc);
+        } else {
+            user.setLocation(null);
+        }
+    }
+
+    public boolean exists(Long id) { return userRepository.existsById(id); }
+
 }

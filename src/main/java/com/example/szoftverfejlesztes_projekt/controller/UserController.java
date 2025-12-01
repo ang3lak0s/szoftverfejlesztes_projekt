@@ -4,6 +4,12 @@ import com.example.szoftverfejlesztes_projekt.model.User;
 import com.example.szoftverfejlesztes_projekt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.szoftverfejlesztes_projekt.repository.UserRepository;
+import com.example.szoftverfejlesztes_projekt.repository.BandRepository;
+import com.example.szoftverfejlesztes_projekt.repository.LocationRepository;
+import com.example.szoftverfejlesztes_projekt.model.User;
+import com.example.szoftverfejlesztes_projekt.model.Band;
+import com.example.szoftverfejlesztes_projekt.model.Location;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +17,20 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private BandRepository bandRepository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @PostMapping
     public User createUser(@RequestBody User user) {

@@ -9,6 +9,8 @@ import com.example.szoftverfejlesztes_projekt.repository.OpenMicSlotRepository;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 import com.example.szoftverfejlesztes_projekt.model.Location;
 
@@ -41,6 +43,18 @@ public class OpenMicService {
         // Ehhez a repository-ban kell lennie egy megfelelő lekérdezésnek!
 
         // Ideiglenes megoldás: kihagyjuk a konfliktus ellenőrzést
+        // Ideiglenes megoldás 2: megoldjuk az eredeti problémát, ezáltal nem kell ideiglenes megoldás
+        // Új probléma: Az új ideiglenes megoldás neve és leírása annyira eltér, hogy paradoxont hoztunk létre
+
+
+        LocalDateTime newStart = slot.getStartTime();
+        LocalDateTime newEnd   = slot.getEndTime();
+
+        var conflicts = openMicSlotRepository.findConflicts(band, newStart, newEnd);
+
+        if (!conflicts.isEmpty()) {
+            throw new IllegalStateException("Ezen az időponton máshol kell lenned főnök!");
+        }
 
         //Foglalás és mentés
         slot.setBand(band);
