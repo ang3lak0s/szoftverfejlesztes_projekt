@@ -17,7 +17,6 @@ public interface OpenMicSlotRepository extends JpaRepository<OpenMicSlot, Long> 
 
     @Query("SELECT s FROM OpenMicSlot s " +
             "WHERE s.band = :band " +
-//            "WHERE s.band = :band " +
             "AND s.booked = true " +
             "AND s.endTime > :start " +
             "AND s.startTime < :end")
