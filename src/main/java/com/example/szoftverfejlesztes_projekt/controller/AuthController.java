@@ -68,6 +68,6 @@ public class AuthController {
 
                     return ResponseEntity.ok(user);
                 })
-                .orElse(ResponseEntity.badRequest().body("Gondolom előbb regiisztrálni kéne, de csak gondolom..."));
+                .orElse(ResponseEntity.badRequest().body("Gondolom előbb regisztrálni kéne, de csak gondolom..."));
     }
 }
