@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function BandList() {
+export default function BandList({onBack}) {
   const [bands, setBands] = useState([]);
 
   useEffect(() => {
@@ -11,28 +11,29 @@ export default function BandList() {
   }, []);
 
   return (
-    <div>
-      <h2>Bandák listája</h2>
-      <table border="1" cellPadding="6" style={{ marginTop: "12px" }}>
-        <thead>
+      <div style={{padding: 20, fontFamily: "sans-serif"}}>
+        <button onClick={onBack}> ← Vissza</button>
+        <h2>Bandák listája</h2>
+        <table border="1" cellPadding="6" style={{marginTop: "12px"}}>
+          <thead>
           <tr>
             <th>ID</th>
             <th>Név</th>
             <th>Műfaj</th>
             <th>Email</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           {bands.map((b) => (
-            <tr key={b.bandId}>
-              <td>{b.bandId}</td>
-              <td>{b.bandName}</td>
-              <td>{b.playedGenre}</td>
-              <td>{b.email}</td>
-            </tr>
+              <tr key={b.bandId}>
+                <td>{b.bandId}</td>
+                <td>{b.bandName}</td>
+                <td>{b.playedGenre}</td>
+                <td>{b.email}</td>
+              </tr>
           ))}
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
   );
 }

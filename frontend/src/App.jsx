@@ -11,6 +11,7 @@ import BandClientPage from "./BandClientPage";
 import LocationClientPage from "./LocationClientPage";
 import RegisterPage from "./RegisterPage";
 import LoginPage from "./LoginPage";
+import logo from './assets/logo.jfif';
 
 export default function App() {
   const [mode, setMode] = useState("main");
@@ -78,35 +79,36 @@ export default function App() {
         }}
       >
         <header
-          style={{
-            width: "100%",
-            display: "flex",
-            borderBottom: "1px solid #333",
-            padding: "16px",
-            alignItems: "center",
-            gap: "16px",
-          }}
+            style={{
+              width: "100%",
+              display: "flex",
+              borderBottom: "1px solid #333",
+              padding: "16px",
+              alignItems: "center",
+              gap: "16px",
+            }}
         >
-          <div style={{ fontWeight: "bold" }}>BÁLA</div>
+          <div style={{fontWeight: "bold"}}>BÁLA</div>
 
-          <div style={{ flex: 1, textAlign: "center", fontSize: "24px" }}>
-            Logó helye
+          <div style={{ flex: 1, fontSize: "24px" }}>
+            <img src={logo} alt="Logo" style={{ height: "50px", objectFit: "contain" }} />
           </div>
 
-          <div style={{ display: "flex", gap: "8px" }}>
+
+          <div style={{display: "flex", gap: "8px"}}>
             <button onClick={() => setAuthView("login")}>Belépés</button>
             <button onClick={() => setAuthView("register")}>Regisztráció</button>
           </div>
         </header>
 
         <main
-          style={{
-            width: "100%",
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            style={{
+              width: "100%",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
             gap: "24px",
             padding: "24px",
             textAlign: "center",
@@ -261,15 +263,15 @@ export default function App() {
   }
 
   if (mode === "admin" && view === "bands") {
-    return <BandList />;
+    return <BandList onBack={() => setView("home")}/>;
   }
 
   if (mode === "admin" && view === "locations") {
-    return <LocationList />;
+    return <LocationList onBack={() => setView("home")}/>;
   }
 
   if (mode === "admin" && view === "fullBands") {
-    return <FullBandList />;
+    return <FullBandList onBack={() => setView("home")}/>;
   }
 
   return (
