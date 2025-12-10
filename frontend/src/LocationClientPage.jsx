@@ -6,6 +6,7 @@ export default function LocationClientPage({ onBack }) {
   const [slots, setSlots] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const loadSlots = async () => {
     try {
@@ -27,37 +28,87 @@ export default function LocationClientPage({ onBack }) {
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
-      <button onClick={onBack}>← Vissza a főoldalra</button>
-      <h1>Helyszín felület</h1>
-      <p>(Ideiglenesen az 1-es ID-jú helyszín van „bejelentkezve”.)</p>
+      <div
+          style={{
+            padding: 20,
+            fontFamily: "sans-serif",
+            background: "#111",
+            color: "white",
+            minHeight: "100vh",
+          }}
+      >
+        {/* Vissza gomb */}
+        <button
+            onClick={onBack}
+            style={{
+                padding: "8px 16px",
+                borderRadius: "8px",
+                border: "none",
+                color: "white",
+                cursor: "pointer",
+                marginBottom: "20px",
+                display: "inline-block",
+                fontFamily: "sans-serif",
+                float: "left"
+            }}
+        >
+          ← Vissza
+        </button>
 
-      {loading && <p>Betöltés...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {/* Fejléc */}
+        <h1 style={{ fontSize: "36px", marginBottom: "8px" }}>Helyszín felület</h1>
+        <p style={{ fontStyle: "italic", marginBottom: "24px" }}>
+          (Ideiglenesen az 1-es ID-jú helyszín van „bejelentkezve”.)
+        </p>
 
-      <h2>Saját Open Mic slotjaim</h2>
-      <table border="1" cellPadding="6">
-        <thead>
-          <tr>
+        {loading && <p>Betöltés / művelet folyamatban…</p>}
+        {message && <p style={{ color: "lightgreen" }}>{message}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+
+        {/* Slotok */}
+        <h2 style={{ marginBottom: "12px" }}>Saját Open Mic slotjaim</h2>
+        <table
+            border="1"
+            cellPadding="6"
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+              textAlign: "center",
+            }}
+        >
+          <thead>
+          <tr style={{ backgroundColor: "#333" }}>
             <th>ID</th>
             <th>Kezdés</th>
             <th>Befejezés</th>
             <th>Foglalt?</th>
             <th>Foglaló banda</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           {slots.map((s) => (
-            <tr key={s.id}>
-              <td>{s.id}</td>
-              <td>{s.startTime}</td>
-              <td>{s.endTime}</td>
-              <td>{s.booked ? "Igen" : "Nem"}</td>
-              <td>{s.band ? s.band.bandName : "-"}</td>
-            </tr>
+              <tr
+                  key={s.id}
+                  style={{
+                    backgroundColor: s.booked ? "#444" : "#222",
+                    transition: "background 0.3s",
+                  }}
+                  onMouseEnter={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#555")
+                  }
+                  onMouseLeave={(e) =>
+                      (e.currentTarget.style.backgroundColor = s.booked ? "#444" : "#222")
+                  }
+              >
+                <td>{s.id}</td>
+                <td>{s.startTime}</td>
+                <td>{s.endTime}</td>
+                <td>{s.booked ? "Igen" : "Nem"}</td>
+                <td>{s.band ? s.band.bandName : "-"}</td>
+              </tr>
           ))}
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </div>
   );
 }

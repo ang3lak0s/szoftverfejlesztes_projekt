@@ -96,7 +96,7 @@ export default function RegisterPage({ onRegistered, onBack }) {
   return (
     <div style={{ padding: 20 }}>
       {onBack && (
-        <button onClick={onBack} style={{ marginBottom: 16 }}>
+        <button onClick={onBack} style={{ marginBottom: 16, fontFamily: "sans-serif"}}>
           ← Vissza
         </button>
       )}
