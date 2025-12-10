@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./App.css";
+
 import BandCrud from "./BandCrud";
 import LocationCrud from "./LocationCrud";
 import UserCrud from "./UserCrud";
@@ -11,267 +13,157 @@ import BandClientPage from "./BandClientPage";
 import LocationClientPage from "./LocationClientPage";
 import RegisterPage from "./RegisterPage";
 import LoginPage from "./LoginPage";
+import logo from './assets/logo.jfif';
+
+const RICKROLL_URL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1";
+
+const handleLogoClick = () => {
+    window.open(RICKROLL_URL, "_blank");
+};
+
+const MainMode = ({ authView, setAuthView, onLoginSuccess }) => {
+    return (
+        <div className="main-layout">
+            <header className="app-header">
+                <button className="logo-button" onClick={handleLogoClick} title="Kattints ide a titkos linkért!">
+                    <div className="logo-content">
+                        <img src={logo} alt="BÁLA Logo" className="logo" />
+                        <div className="app-title">BÁLA</div>
+                    </div>
+                </button>
+
+                <div className="auth-buttons">
+                    <button className="btn-primary" onClick={() => setAuthView("login")}>
+                        Belépés
+                    </button>
+                    <button className="btn-secondary" onClick={() => setAuthView("register")}>
+                        Regisztráció
+                    </button>
+                </div>
+            </header>
+
+            <main className="main-content">
+                {authView === "login" && (
+                    <div className="auth-box">
+                        <LoginPage onLogin={onLoginSuccess} onBack={() => setAuthView("none")} />
+                    </div>
+                )}
+
+                {authView === "register" && (
+                    <div className="auth-box">
+                        <RegisterPage onRegistered={onLoginSuccess} onBack={() => setAuthView("none")} />
+                    </div>
+                )}
+
+                {authView === "none" && (
+                    <div className="hero-section">
+                        <h1 className="hero-title">Zenekar - Helyszín Rendszer</h1>
+                        <p className="hero-text">
+                            A leggyorsabb út a tökéletes koncerthez. Keresd meg a zenekarodhoz illő helyszínt, vagy a helyszínedhez illő bandát!
+                        </p>
+                        <p className="quote">
+                            „Ezt az alkalmazást Arnóczki Áron emlékére fejlesztettük, szívünkben örökké él."
+                        </p>
+                        <div className="mode-selection">
+                            <button className="btn-mode-select" onClick={() => setAuthView("register")}>
+                                Kezdés (Regisztráció)
+                            </button>
+                            <button className="btn-mode-select secondary" onClick={() => setAuthView("login")}>
+                                Belépés
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </main>
+        </div>
+    );
+};
+
+
+const AdminDashboard = ({ view, setView, handleLogout }) => {
+    const viewsMap = {
+        home: { title: "Admin Főoldal", component: null },
+        bands: { title: "Zenekarok listázása", component: BandList },
+        locations: { title: "Helyszínek listázása", component: LocationList },
+        fullBands: { title: "Zenekarok (Teljes Adat)", component: FullBandList },
+        bandCrud: { title: "Zenekarok CRUD", component: BandCrud },
+        locationCrud: { title: "Helyszínek CRUD", component: LocationCrud },
+        userCrud: { title: "Userek CRUD", component: UserCrud },
+        eventCrud: { title: "Open Mic Event CRUD", component: OpenMicEventCrud },
+        slotCrud: { title: "Open Mic Slot CRUD", component: OpenMicSlotCrud },
+    };
+
+    const CurrentComponent = viewsMap[view]?.component;
+
+    return (
+        <div className="admin-layout">
+            <header className="admin-header">
+                <button className="btn-back" onClick={handleLogout}>
+                    ← Kilépés az admin felületről
+                </button>
+                <h1 className="admin-title">Admin Dashboard</h1>
+            </header>
+
+            {view === "home" ? (
+                <div className="admin-menu">
+                    <p className="admin-prompt">Válasszon menüpontot a kezeléshez:</p>
+                    <div className="admin-buttons">
+                        {Object.entries(viewsMap).filter(([key]) => key !== 'home').map(([key, { title }]) => (
+                            <button key={key} className="btn-admin-menu" onClick={() => setView(key)}>
+                                {title}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            ) : (
+                <div className="admin-crud-view">
+                    <button className="btn-back" onClick={() => setView("home")}>
+                        ← Vissza az admin menübe
+                    </button>
+                    <h2 className="crud-title">{viewsMap[view].title}</h2>
+                    {CurrentComponent && <CurrentComponent onBack={() => setView("home")} />}
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default function App() {
-  const [mode, setMode] = useState("main");
-  const [view, setView] = useState("home");
-  const [authView, setAuthView] = useState("none");
+    const [view, setView] = useState("home");
+    const [authView, setAuthView] = useState("none");
+    const [currentUser, setCurrentUser] = useState(null);
 
-  const [currentUser, setCurrentUser] = useState(null);
+    const handleLogout = () => {
+        setCurrentUser(null);
+        setView("home");
+        setAuthView("none");
+    };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    setMode("main");
-    setView("home");
-    setAuthView("none");
-  };
+    const handleLoginSuccess = (user) => {
+        setCurrentUser(user);
+        setAuthView("none");
+        if (user.role === "ADMIN") {
+            setView("home");
+        }
+    };
 
-  const handleLoginSuccess = (user) => {
-    setCurrentUser(user);
-    setAuthView("none");
-
-    if (user.role === "BAND") {
-      setMode("band");
-    } else if (user.role === "LOCATION") {
-      setMode("location");
-    } else if (user.role === "ADMIN") {
-      setMode("admin");
-      setView("home");
-    } else {
-      setMode("main");
+    if (currentUser) {
+        if (currentUser.role === "BAND") {
+            return <BandClientPage onBack={handleLogout} band={currentUser.band} user={currentUser} />;
+        }
+        if (currentUser.role === "LOCATION") {
+            return <LocationClientPage onBack={handleLogout} location={currentUser.location} user={currentUser} />;
+        }
+        if (currentUser.role === "ADMIN") {
+            return <AdminDashboard view={view} setView={setView} handleLogout={handleLogout} />;
+        }
     }
-  };
 
-  if (currentUser) {
-    if (currentUser.role === "BAND") {
-      return (
-        <BandClientPage
-          onBack={handleLogout}
-          band={currentUser.band}
-          user={currentUser}
-        />
-      );
-    }
-    if (currentUser.role === "LOCATION") {
-      return (
-        <LocationClientPage
-        onBack={handleLogout}
-        location={currentUser.location}
-        user={currentUser}
-        />
-      );
-    }
-    if (currentUser.role === "ADMIN") {
-    }
-  }
-
-  if (mode === "main") {
     return (
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "#111",
-          color: "white",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <header
-          style={{
-            display: "flex",
-            borderBottom: "1px solid #333",
-            padding: "16px",
-            alignItems: "center",
-            gap: "16px",
-          }}
-        >
-          <div style={{ fontWeight: "bold" }}>Belépés</div>
-
-          <div style={{ flex: 1, textAlign: "center", fontSize: "24px" }}>
-            Logó helye
-          </div>
-
-          <div style={{ display: "flex", gap: "8px" }}>
-            <button onClick={() => setAuthView("login")}>Belépés</button>
-            <button onClick={() => setAuthView("register")}>Regisztráció</button>
-          </div>
-        </header>
-
-        <main
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "24px",
-            padding: "24px",
-            textAlign: "center",
-          }}
-        >
-          {authView === "login" && (
-            <LoginPage
-              onLogin={handleLoginSuccess}
-              onBack={() => setAuthView("none")}
-            />
-          )}
-
-          {authView === "register" && (
-            <RegisterPage
-              onRegistered={null}
-              onBack={() => setAuthView("none")}
-            />
-          )}
-
-          {authView === "none" && (
-            <>
-              <div>
-                <h1>Zenekar–Helyszín Rendszer</h1>
-                <p>
-                  Tipikus kis hype szöveg, hogy mennyire jó ez az alkalmazás,
-                  annak ellenére, hogy örülünk, ha csütörtökön megjelenik
-                  valami a képernyőn.
-                </p>
-                <p style={{ marginTop: "16px", fontStyle: "italic" }}>
-                  „Ezt az alkalmazást Arnóczki Áron emlékére fejlesztettük,
-                  szívünkben örökké él (Fel kéne tolni valamit Githubra
-                  főnök!).”
-                </p>
-              </div>
-
-              <div
-                style={{ display: "flex", gap: "16px", marginTop: "24px" }}
-              >
-                <button
-                  onClick={() => setMode("band")}
-                  style={{ padding: "12px 24px", borderRadius: "8px" }}
-                >
-                  Banda vagyok
-                </button>
-                <button
-                  onClick={() => setMode("location")}
-                  style={{ padding: "12px 24px", borderRadius: "8px" }}
-                >
-                  Helyszín vagyok
-                </button>
-                <button
-                  onClick={() => {
-                    setMode("admin");
-                    setView("home");
-                  }}
-                  style={{ padding: "12px 24px", borderRadius: "8px" }}
-                >
-                  Admin vagyok
-                </button>
-              </div>
-            </>
-          )}
-        </main>
-
-        <footer
-          style={{
-            borderTop: "1px solid #333",
-            padding: "16px",
-            textAlign: "center",
-          }}
-        >
-          Közelgő események / valami hasonló helye
-        </footer>
-      </div>
+        <MainMode
+            authView={authView}
+            setAuthView={setAuthView}
+            onLoginSuccess={handleLoginSuccess}
+        />
     );
-  }
-
-  if (mode === "band") {
-    return <BandClientPage onBack={() => setMode("main")} />;
-  }
-
-  if (mode === "location") {
-    return <LocationClientPage onBack={() => setMode("main")} />;
-  }
-
-  if (mode === "admin" && view === "home") {
-    return (
-      <div
-        style={{
-          minHeight: "100vh",
-          background: "#111",
-          color: "white",
-          padding: "24px",
-        }}
-      >
-        <button
-          onClick={handleLogout}
-          style={{ marginBottom: "16px" }}
-        >
-          ← Kilépés az admin felületről
-        </button>
-
-        <h1 style={{ fontSize: "48px", marginBottom: "16px" }}>
-          Zenekar–Helyszín rendszer
-        </h1>
-
-        <p style={{ marginBottom: "16px" }}>Melyik pirulát választod?</p>
-
-        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-          <button onClick={() => setView("bands")}>Bandák listázása</button>
-          <button onClick={() => setView("locations")}>
-            Helyszínek listázása
-          </button>
-          <button onClick={() => setView("fullBands")}>
-            Bandák (teljes adatok)
-          </button>
-          <button onClick={() => setView("bandCrud")}>Bandák CRUD</button>
-          <button onClick={() => setView("locationCrud")}>
-            Helyszínek CRUD
-          </button>
-          <button onClick={() => setView("userCrud")}>Userek CRUD</button>
-          <button onClick={() => setView("eventCrud")}>
-            Open Mic Event CRUD
-          </button>
-          <button onClick={() => setView("slotCrud")}>
-            Open Mic Slot CRUD
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  if (mode === "admin" && view === "bandCrud") {
-    return <BandCrud onBack={() => setView("home")} />;
-  }
-
-  if (mode === "admin" && view === "locationCrud") {
-    return <LocationCrud onBack={() => setView("home")} />;
-  }
-
-  if (mode === "admin" && view === "userCrud") {
-    return <UserCrud onBack={() => setView("home")} />;
-  }
-
-  if (mode === "admin" && view === "eventCrud") {
-    return <OpenMicEventCrud onBack={() => setView("home")} />;
-  }
-
-  if (mode === "admin" && view === "slotCrud") {
-    return <OpenMicSlotCrud onBack={() => setView("home")} />;
-  }
-
-  if (mode === "admin" && view === "bands") {
-    return <BandList />;
-  }
-
-  if (mode === "admin" && view === "locations") {
-    return <LocationList />;
-  }
-
-  if (mode === "admin" && view === "fullBands") {
-    return <FullBandList />;
-  }
-
-  return (
-    <div>
-      A hívott szám jelenleg nem elérhető, üzenetét hagyja meg a sípszó után
-      *pííííp*
-    </div>
-  );
 }

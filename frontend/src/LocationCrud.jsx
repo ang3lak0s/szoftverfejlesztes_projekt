@@ -152,7 +152,7 @@ export default function LocationCrud({ onBack }) {
 
   return (
     <div style={{ padding: 20, fontFamily: "sans-serif" }}>
-      <button onClick={onBack}>← Vissza főoldalra</button>
+      <button onClick={onBack}>← Vissza</button>
       <h1>Helyszínek – CRUD</h1>
 
       {loading && <p>Betöltés / művelet folyamatban…</p>}

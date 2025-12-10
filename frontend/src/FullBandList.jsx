@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function FullBandList() {
+export default function FullBandList({ onBack }) {
   const [bands, setBands] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,8 @@ export default function FullBandList() {
   }, []);
 
   return (
-    <div>
+    <div style={{ padding: 20, fontFamily: "sans-serif"}}>
+      <button onClick={onBack}> ← Vissza</button>
       <h2>Bandák – összes adat</h2>
 
       <table border="1" cellPadding="6" style={{ marginTop: "12px" }}>

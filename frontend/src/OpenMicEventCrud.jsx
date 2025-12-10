@@ -96,16 +96,16 @@ export default function OpenMicEventCrud({ onBack }) {
   };
 
   return (
-    <div>
-      <button onClick={onBack}>Vissza</button>
-      <h1>Open Mic események – CRUD</h1>
+      <div style={{padding: 20, fontFamily: "sans-serif"}}>
+        <button onClick={onBack}> ← Vissza</button>
+        <h1>Open Mic események – CRUD</h1>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p style={{color: "red"}}>{error}</p>}
 
-      {/* Lista */}
-      <h2>Események</h2>
-      <table border="1" cellPadding="6">
-        <thead>
+        {/* Lista */}
+        <h2>Események</h2>
+        <table border="1" cellPadding="6">
+          <thead>
           <tr>
             <th>ID</th>
             <th>Kezdés</th>
@@ -113,69 +113,70 @@ export default function OpenMicEventCrud({ onBack }) {
             <th>Helyszín</th>
             <th></th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           {events.map((ev) => (
-            <tr key={ev.id}>
-              <td>{ev.id}</td>
-              <td>{ev.startTime}</td>
-              <td>{ev.endTime}</td>
-              <td>{ev.location?.locationName || "-"}</td>
-              <td>
-                <button onClick={() => handleEdit(ev)}>Szerkesztés</button>{" "}
-                <button onClick={() => handleDelete(ev.id)}>Törlés</button>
-              </td>
-            </tr>
+              <tr key={ev.id}>
+                <td>{ev.id}</td>
+                <td>{ev.startTime}</td>
+                <td>{ev.endTime}</td>
+                <td>{ev.location?.locationName || "-"}</td>
+                <td>
+                  <button onClick={() => handleEdit(ev)}>Szerkesztés</button>
+                  {" "}
+                  <button onClick={() => handleDelete(ev.id)}>Törlés</button>
+                </td>
+              </tr>
           ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
-      {/* Form */}
-      <h2>{isEdit ? "Esemény szerkesztése" : "Új esemény hozzáadása"}</h2>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "grid", gap: 8, maxWidth: 320 }}
-      >
-        <label>
-          Kezdés:
-          <input
-            type="datetime-local"
-            name="startTime"
-            value={form.startTime}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        {/* Form */}
+        <h2>{isEdit ? "Esemény szerkesztése" : "Új esemény hozzáadása"}</h2>
+        <form
+            onSubmit={handleSubmit}
+            style={{display: "grid", gap: 8, maxWidth: 320}}
+        >
+          <label>
+            Kezdés:
+            <input
+                type="datetime-local"
+                name="startTime"
+                value={form.startTime}
+                onChange={handleChange}
+                required
+            />
+          </label>
 
-        <label>
-          Befejezés:
-          <input
-            type="datetime-local"
-            name="endTime"
-            value={form.endTime}
-            onChange={handleChange}
-            required
-          />
-        </label>
+          <label>
+            Befejezés:
+            <input
+                type="datetime-local"
+                name="endTime"
+                value={form.endTime}
+                onChange={handleChange}
+                required
+            />
+          </label>
 
-        <label>
-          Helyszín:
-          <select
-            name="locationId"
-            value={form.locationId}
-            onChange={handleChange}
-          >
-            <option value="">-- válassz helyszínt --</option>
-            {locations.map((loc) => (
-              <option key={loc.locationId} value={loc.locationId}>
-                {loc.locationName} (ID: {loc.locationId})
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            Helyszín:
+            <select
+                name="locationId"
+                value={form.locationId}
+                onChange={handleChange}
+            >
+              <option value="">-- válassz helyszínt --</option>
+              {locations.map((loc) => (
+                  <option key={loc.locationId} value={loc.locationId}>
+                    {loc.locationName} (ID: {loc.locationId})
+                  </option>
+              ))}
+            </select>
+          </label>
 
-        <button type="submit">{isEdit ? "Mentés" : "Hozzáadás"}</button>
-      </form>
-    </div>
+          <button type="submit">{isEdit ? "Mentés" : "Hozzáadás"}</button>
+        </form>
+      </div>
   );
 }
