@@ -201,7 +201,7 @@ export default function App() {
                 textAlign: "center",
             }}
         >
-          <BandClientPage onBack={() => setMode("main")} />
+          <BandClientPage style={{boxAlign: "left"}} onBack={() => setMode("main")} />
         </div>
     );
   }
@@ -222,7 +222,7 @@ export default function App() {
               textAlign: "center",
           }}
       >
-        <LocationClientPage onBack={() => setMode("main")} />
+        <LocationClientPage style={{boxAlign: "left"}} onBack={() => setMode("main")} />
       </div>
     );
   }
