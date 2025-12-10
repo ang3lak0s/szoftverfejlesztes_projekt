@@ -180,18 +180,51 @@ export default function App() {
             textAlign: "center",
           }}
         >
-          Közelgő események / valami hasonló helye
+          Közelgő események / Nodus Tollens
         </footer>
       </div>
     );
   }
 
   if (mode === "band") {
-    return <BandClientPage onBack={() => setMode("main")} />;
+    return (
+        <div
+            style={{
+              width: "100%",
+              minHeight: "100vh",
+              background: "#111",
+              color: "white",
+              display: "block",
+              boxSizing: "border-box",
+                borderTop: "1px solid #333",
+                padding: "16px",
+                textAlign: "center",
+            }}
+        >
+          <BandClientPage onBack={() => setMode("main")} />
+        </div>
+    );
   }
 
+
   if (mode === "location") {
-    return <LocationClientPage onBack={() => setMode("main")} />;
+    return (
+      <div
+          style={{
+            width: "100%",
+            minHeight: "100vh",
+            background: "#111",
+            color: "white",
+            display: "block",
+            boxSizing: "border-box",
+              borderTop: "1px solid #333",
+              padding: "16px",
+              textAlign: "center",
+          }}
+      >
+        <LocationClientPage onBack={() => setMode("main")} />
+      </div>
+    );
   }
 
   if (mode === "admin" && view === "home") {
