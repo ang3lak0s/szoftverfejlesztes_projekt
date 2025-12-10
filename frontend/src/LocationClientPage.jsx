@@ -46,17 +46,22 @@ export default function LocationClientPage({ onBack }) {
                 border: "none",
                 color: "white",
                 cursor: "pointer",
-                marginBottom: "20px",
+                //marginBottom: "20px",
                 display: "inline-block",
                 fontFamily: "sans-serif",
-                float: "left"
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                zIndex: 1000
             }}
         >
           ← Vissza
         </button>
 
         {/* Fejléc */}
-        <h1 style={{ fontSize: "36px", marginBottom: "8px" }}>Helyszín felület</h1>
+        <h1 style={{ fontSize: "36px", marginBottom: "8px"}}>
+            <div style = {{textAlign: "center"}}>Helyszín felület</div>
+        </h1>
         <p style={{ fontStyle: "italic", marginBottom: "24px" }}>
           (Ideiglenesen az 1-es ID-jú helyszín van „bejelentkezve”.)
         </p>

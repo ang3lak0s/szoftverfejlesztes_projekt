@@ -144,7 +144,7 @@ export default function App() {
                 </p>
               </div>
 
-              <div
+                {/*<div
                 style={{ display: "flex", gap: "16px", marginTop: "24px" }}
               >
                 <button
@@ -168,7 +168,7 @@ export default function App() {
                 >
                   Admin vagyok
                 </button>
-              </div>
+              </div>*/}
             </>
           )}
         </main>
@@ -180,7 +180,7 @@ export default function App() {
             textAlign: "center",
           }}
         >
-          Közelgő események / Nodus Tollens
+        Nodus Tollens
         </footer>
       </div>
     );

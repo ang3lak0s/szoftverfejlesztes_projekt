@@ -73,14 +73,17 @@ export default function BandClientPage({ onBack }) {
                 marginBottom: "20px",
                 display: "inline-block",
                 fontFamily: "sans-serif",
-                float: "left"
+                position: "absolute",
+                top: "20px",
+                left: "20px",
+                zIndex: 1000
             }}
         >
           ← Vissza
         </button>
 
         {/* Fejléc */}
-        <h1 style={{ fontSize: "36px", marginBottom: "8px" }}>Banda felület</h1>
+        <h1 style={{ fontSize: "36px", marginBottom: "8px", textAlign: "center"}}>Banda felület</h1>
         <p style={{ fontStyle: "italic", marginBottom: "24px" }}>
           (Ideiglenesen az 1-es ID-jú banda van „bejelentkezve”.)
         </p>
