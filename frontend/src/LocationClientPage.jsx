@@ -62,9 +62,6 @@ export default function LocationClientPage({ onBack }) {
         <h1 style={{ fontSize: "36px", marginBottom: "8px"}}>
             <div style = {{textAlign: "center"}}>Helyszín felület</div>
         </h1>
-        <p style={{ fontStyle: "italic", marginBottom: "24px" }}>
-          (Ideiglenesen az 1-es ID-jú helyszín van „bejelentkezve”.)
-        </p>
 
         {loading && <p>Betöltés / művelet folyamatban…</p>}
         {message && <p style={{ color: "lightgreen" }}>{message}</p>}

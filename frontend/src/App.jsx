@@ -172,16 +172,6 @@ export default function App() {
             </>
           )}
         </main>
-
-        <footer
-          style={{
-            borderTop: "1px solid #333",
-            padding: "16px",
-            textAlign: "center",
-          }}
-        >
-        Nodus Tollens
-        </footer>
       </div>
     );
   }
