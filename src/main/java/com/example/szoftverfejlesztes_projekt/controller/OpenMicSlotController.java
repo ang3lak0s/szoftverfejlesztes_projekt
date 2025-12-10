@@ -1,5 +1,6 @@
 package com.example.szoftverfejlesztes_projekt.controller;
 
+import com.example.szoftverfejlesztes_projekt.dto.OpenMicSlotDTO;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicEvent;
 import com.example.szoftverfejlesztes_projekt.model.OpenMicSlot;
 import com.example.szoftverfejlesztes_projekt.repository.OpenMicEventRepository;
@@ -23,21 +24,50 @@ public class OpenMicSlotController {
     private OpenMicEventRepository openMicEventRepository;
 
     @GetMapping
-    public List<OpenMicSlot> getAll() {
-        return openMicSlotRepository.findAll();
+    public List<OpenMicSlotDTO> getAll() {
+        List<OpenMicSlot> slots = openMicSlotRepository.findAll();
+
+        return slots.stream()
+                .map(slot -> {
+                    String locationName = "";
+                    if (slot.getEvent() != null && slot.getEvent().getLocation() != null) {
+                        locationName = slot.getEvent().getLocation().getLocationName();
+                    }
+                    return new OpenMicSlotDTO(
+                            slot.getId(),
+                            slot.getStartTime().toString(),
+                            slot.getEndTime().toString(),
+                            slot.isBooked(),
+                            locationName
+                    );
+                })
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OpenMicSlot> getById(@PathVariable Long id) {
-        return openMicSlotRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<OpenMicSlotDTO> getById(@PathVariable Long id) {
+        try {
+            OpenMicSlot slot = openMicSlotRepository.findById(id).orElseThrow();
+            String locationName = "";
+            if (slot.getEvent() != null && slot.getEvent().getLocation() != null) {
+                locationName = slot.getEvent().getLocation().getLocationName();
+            }
+            OpenMicSlotDTO dto = new OpenMicSlotDTO(
+                    slot.getId(),
+                    slot.getStartTime().toString(),
+                    slot.getEndTime().toString(),
+                    slot.isBooked(),
+                    locationName
+            );
+            return ResponseEntity.ok(dto);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping
     public OpenMicSlot create(@RequestBody OpenMicSlot slot) {
         attachEvent(slot);
-        // band-et itt direkt NEM piszkáljuk, azt a foglalási logika kezeli
         return openMicSlotRepository.save(slot);
     }
 
@@ -52,7 +82,6 @@ public class OpenMicSlotController {
                         slot.setStartTime(updated.getStartTime());
                         slot.setEndTime(updated.getEndTime());
                         slot.setBooked(updated.isBooked());
-                        // event összekötése
                         if (updated.getEvent() != null && updated.getEvent().getId() != null) {
                             OpenMicEvent ev = openMicEventRepository
                                     .findById(updated.getEvent().getId())
@@ -61,7 +90,6 @@ public class OpenMicSlotController {
                         } else {
                             slot.setEvent(null);
                         }
-                        // band-et továbbra sem módosítjuk itt
                         return openMicSlotRepository.save(slot);
                     })
                     .orElseThrow(() -> new NoSuchElementException("Slot not found"));

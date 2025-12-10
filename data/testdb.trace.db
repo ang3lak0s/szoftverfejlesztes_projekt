@@ -1438,6 +1438,486 @@ INSERT INTO BAND (BAND_NAME, PLAYED_GENRE, PHONE_NUM, EMAIL, PRICE_PER_HOUR, ACC
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:1570)
+2025-12-10 23:59:43.588533+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Cannot parse "TIMESTAMP" constant "2025.01.20 19:30"; SQL statement:
+INSERT INTO OPEN_MIC_EVENT (ID, LOCATION_ID, START_TIME, END_TIME) VALUES
+(1, 1, '2025.01.20 18:00', '2025.01.20 19:30'),
+(2, 1, '2025.01.20 19:30', '2025.01.20 21:00'),
+(3, 1, '2025.01.20 21:00', '2025.01.20 22:30'),
+(4, 2, '2025.01.25 18:00', '2025.01.25 19:30'),
+(5, 2, '2025.01.25 19:30', '2025.01.25 21:00'),
+(6, 2, '2025.01.25 21:00', '2025.01.25 22:30'),
+(7, 3, '2025.01.15 18:00', '2025.01.15 19:30'),
+(8, 3, '2025.01.15 19:30', '2025.01.15 21:00'),
+(9, 3, '2025.01.15 21:00', '2025.01.15 22:30'),
+(10, 4, '2025.01.23 18:00', '2025.01.23 19:30'),
+(11, 4, '2025.01.23 19:30', '2025.01.23 21:00'),
+(12, 4, '2025.01.23 21:00', '2025.01.23 22:30'),
+(13, 5, '2025.01.22 18:00', '2025.01.22 19:30'),
+(14, 5, '2025.01.22 19:30', '2025.01.22 21:00'),
+(15, 5, '2025.01.22 21:00', '2025.01.22 22:30'),
+(16, 6, '2025.01.21 18:00', '2025.01.21 19:30'),
+(17, 6, '2025.01.21 19:30', '2025.01.21 21:00'),
+(18, 6, '2025.01.21 21:00', '2025.01.21 22:30'),
+(19, 7, '2025.01.16 18:00', '2025.01.16 19:30'),
+(20, 7, '2025.01.16 19:30', '2025.01.16 21:00'),
+(21, 7, '2025.01.16 21:00', '2025.01.16 22:30'),
+(22, 8, '2025.01.26 18:00', '2025.01.26 19:30'),
+(23, 8, '2025.01.26 19:30', '2025.01.26 21:00'),
+(24, 8, '2025.01.26 21:00', '2025.01.26 22:30'),
+(25, 9, '2025.01.27 18:00', '2025.01.27 19:30'),
+(26, 9, '2025.01.27 19:30', '2025.01.27 21:00'),
+(27, 9, '2025.01.27 21:00', '2025.01.27 22:30'),
+(28, 10, '2025.01.19 18:00', '2025.01.19 19:30'),
+(29, 10, '2025.01.19 19:30', '2025.01.19 21:00'),
+(30, 10, '2025.01.19 21:00', '2025.01.19 22:30'),
+(31, 11, '2025.01.17 18:00', '2025.01.17 19:30'),
+(32, 11, '2025.01.17 19:30', '2025.01.17 21:00'),
+(33, 11, '2025.01.17 21:00', '2025.01.17 22:30'),
+(34, 12, '2025.01.18 18:00', '2025.01.18 19:30'),
+(35, 12, '2025.01.18 19:30', '2025.01.18 21:00'),
+(36, 12, '2025.01.18 21:00', '2025.01.18 22:30'),
+(37, 13, '2025.01.28 18:00', '2025.01.28 19:30'),
+(38, 13, '2025.01.28 19:30', '2025.01.28 21:00'),
+(39, 13, '2025.01.28 21:00', '2025.01.28 22:30'),
+(40, 14, '2025.01.16 18:00', '2025.01.16 19:30'),
+(41, 14, '2025.01.16 19:30', '2025.01.16 21:00'),
+(42, 14, '2025.01.16 21:00', '2025.01.16 22:30'),
+(43, 15, '2025.01.23 18:00', '2025.01.23 19:30'),
+(44, 15, '2025.01.23 19:30', '2025.01.23 21:00'),
+(45, 15, '2025.01.23 21:00', '2025.01.23 22:30'),
+(46, 16, '2025.01.19 18:00', '2025.01.19 19:30'),
+(47, 16, '2025.01.19 19:30', '2025.01.19 21:00'),
+(48, 16, '2025.01.19 21:00', '2025.01.19 22:30'),
+(49, 17, '2025.01.18 18:00', '2025.01.18 19:30'),
+(50, 17, '2025.01.18 19:30', '2025.01.18 21:00'),
+(51, 17, '2025.01.18 21:00', '2025.01.18 22:30'),
+(52, 18, '2025.01.21 18:00', '2025.01.21 19:30'),
+(53, 18, '2025.01.21 19:30', '2025.01.21 21:00'),
+(54, 18, '2025.01.21 21:00', '2025.01.21 22:30'),
+(55, 19, '2025.01.15 18:00', '2025.01.15 19:30'),
+(56, 19, '2025.01.15 19:30', '2025.01.15 21:00'),
+(57, 19, '2025.01.15 21:00', '2025.01.15 22:30'),
+(58, 20, '2025.01.27 18:00', '2025.01.27 19:30'),
+(59, 20, '2025.01.27 19:30', '2025.01.27 21:00'),
+(60, 20, '2025.01.27 21:00', '2025.01.27 22:30'),
+(61, 21, '2025.01.26 18:00', '2025.01.26 19:30'),
+(62, 21, '2025.01.26 19:30', '2025.01.26 21:00'),
+(63, 21, '2025.01.26 21:00', '2025.01.26 22:30'),
+(64, 22, '2025.01.23 18:00', '2025.01.23 19:30'),
+(65, 22, '2025.01.23 19:30', '2025.01.23 21:00'),
+(66, 22, '2025.01.23 21:00', '2025.01.23 22:30'),
+(67, 23, '2025.01.22 18:00', '2025.01.22 19:30'),
+(68, 23, '2025.01.22 19:30', '2025.01.22 21:00'),
+(69, 23, '2025.01.22 21:00', '2025.01.22 22:30'),
+(70, 24, '2025.01.16 18:00', '2025.01.16 19:30'),
+(71, 24, '2025.01.16 19:30', '2025.01.16 21:00'),
+(72, 24, '2025.01.16 21:00', '2025.01.16 22:30'),
+(73, 25, '2025.01.24 18:00', '2025.01.24 19:30'),
+(74, 25, '2025.01.24 19:30', '2025.01.24 21:00'),
+(75, 25, '2025.01.24 21:00', '2025.01.24 22:30'),
+(76, 26, '2025.01.18 18:00', '2025.01.18 19:30'),
+(77, 26, '2025.01.18 19:30', '2025.01.18 21:00'),
+(78, 26, '2025.01.18 21:00', '2025.01.18 22:30'),
+(79, 27, '2025.01.17 18:00', '2025.01.17 19:30'),
+(80, 27, '2025.01.17 19:30', '2025.01.17 21:00'),
+(81, 27, '2025.01.17 21:00', '2025.01.17 22:30'),
+(82, 28, '2025.01.20 18:00', '2025.01.20 19:30'),
+(83, 28, '2025.01.20 19:30', '2025.01.20 21:00'),
+(84, 28, '2025.01.20 21:00', '2025.01.20 22:30'),
+(85, 29, '2025.01.22 18:00', '2025.01.22 19:30'),
+(86, 29, '2025.01.22 19:30', '2025.01.22 21:00'),
+(87, 29, '2025.01.22 21:00', '2025.01.22 22:30'),
+(88, 30, '2025.01.27 18:00', '2025.01.27 19:30'),
+(89, 30, '2025.01.27 19:30', '2025.01.27 21:00'),
+(90, 30, '2025.01.27 21:00', '2025.01.27 22:30'),
+(91, 31, '2025.01.26 18:00', '2025.01.26 19:30'),
+(92, 31, '2025.01.26 19:30', '2025.01.26 21:00'),
+(93, 31, '2025.01.26 21:00', '2025.01.26 22:30'),
+(94, 32, '2025.01.21 18:00', '2025.01.21 19:30'),
+(95, 32, '2025.01.21 19:30', '2025.01.21 21:00'),
+(96, 32, '2025.01.21 21:00', '2025.01.21 22:30'),
+(97, 33, '2025.01.24 18:00', '2025.01.24 19:30'),
+(98, 33, '2025.01.24 19:30', '2025.01.24 21:00'),
+(99, 33, '2025.01.24 21:00', '2025.01.24 22:30'),
+(100, 34, '2025.01.19 18:00', '2025.01.19 19:30'),
+(101, 34, '2025.01.19 19:30', '2025.01.19 21:00'),
+(102, 34, '2025.01.19 21:00', '2025.01.19 22:30'),
+(103, 35, '2025.01.28 18:00', '2025.01.28 19:30'),
+(104, 35, '2025.01.28 19:30', '2025.01.28 21:00'),
+(105, 35, '2025.01.28 21:00', '2025.01.28 22:30'),
+(106, 36, '2025.01.25 18:00', '2025.01.25 19:30'),
+(107, 36, '2025.01.25 19:30', '2025.01.25 21:00'),
+(108, 36, '2025.01.25 21:00', '2025.01.25 22:30'),
+(109, 37, '2025.01.26 18:00', '2025.01.26 19:30'),
+(110, 37, '2025.01.26 19:30', '2025.01.26 21:00'),
+(111, 37, '2025.01.26 21:00', '2025.01.26 22:30'),
+(112, 38, '2025.01.23 18:00', '2025.01.23 19:30'),
+(113, 38, '2025.01.23 19:30', '2025.01.23 21:00'),
+(114, 38, '2025.01.23 21:00', '2025.01.23 22:30'),
+(115, 39, '2025.01.17 18:00', '2025.01.17 19:30'),
+(116, 39, '2025.01.17 19:30', '2025.01.17 21:00'),
+(117, 39, '2025.01.17 21:00', '2025.01.17 22:30'),
+(118, 40, '2025.01.18 18:00', '2025.01.18 19:30'),
+(119, 40, '2025.01.18 19:30', '2025.01.18 21:00'),
+(120, 40, '2025.01.18 21:00', '2025.01.18 22:30') [22007-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertToTimestamp(Value.java:2006)
+	at org.h2.value.Value.convertTo(Value.java:1179)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1118)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:406)
+	at org.h2.table.Table.convertInsertRow(Table.java:963)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:304)
+	at org.h2.command.Command.executeUpdate(Command.java:248)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp.query(WebApp.java:1118)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+Caused by: java.lang.NumberFormatException: Error at index 4 in: "2025.0"
+	at java.base/java.lang.NumberFormatException.forCharSequence(NumberFormatException.java:83)
+	at java.base/java.lang.Integer.parseInt(Integer.java:663)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.util.DateTimeUtils.parseTimestamp(DateTimeUtils.java:338)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 55 more
+2025-12-11 00:01:56.815357+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Cannot parse "TIMESTAMP" constant "2025.01.20 19:30"; SQL statement:
+INSERT INTO OPEN_MIC_EVENT (ID, LOCATION_ID, START_TIME, END_TIME) VALUES
+(1, 1, '2025.01.20 18:00', '2025.01.20 19:30'),
+(2, 1, '2025.01.20 19:30', '2025.01.20 21:00'),
+(3, 1, '2025.01.20 21:00', '2025.01.20 22:30'),
+(4, 2, '2025.01.25 18:00', '2025.01.25 19:30'),
+(5, 2, '2025.01.25 19:30', '2025.01.25 21:00'),
+(6, 2, '2025.01.25 21:00', '2025.01.25 22:30'),
+(7, 3, '2025.01.15 18:00', '2025.01.15 19:30'),
+(8, 3, '2025.01.15 19:30', '2025.01.15 21:00'),
+(9, 3, '2025.01.15 21:00', '2025.01.15 22:30'),
+(10, 4, '2025.01.23 18:00', '2025.01.23 19:30'),
+(11, 4, '2025.01.23 19:30', '2025.01.23 21:00'),
+(12, 4, '2025.01.23 21:00', '2025.01.23 22:30'),
+(13, 5, '2025.01.22 18:00', '2025.01.22 19:30'),
+(14, 5, '2025.01.22 19:30', '2025.01.22 21:00'),
+(15, 5, '2025.01.22 21:00', '2025.01.22 22:30'),
+(16, 6, '2025.01.21 18:00', '2025.01.21 19:30'),
+(17, 6, '2025.01.21 19:30', '2025.01.21 21:00'),
+(18, 6, '2025.01.21 21:00', '2025.01.21 22:30'),
+(19, 7, '2025.01.16 18:00', '2025.01.16 19:30'),
+(20, 7, '2025.01.16 19:30', '2025.01.16 21:00'),
+(21, 7, '2025.01.16 21:00', '2025.01.16 22:30'),
+(22, 8, '2025.01.26 18:00', '2025.01.26 19:30'),
+(23, 8, '2025.01.26 19:30', '2025.01.26 21:00'),
+(24, 8, '2025.01.26 21:00', '2025.01.26 22:30'),
+(25, 9, '2025.01.27 18:00', '2025.01.27 19:30'),
+(26, 9, '2025.01.27 19:30', '2025.01.27 21:00'),
+(27, 9, '2025.01.27 21:00', '2025.01.27 22:30'),
+(28, 10, '2025.01.19 18:00', '2025.01.19 19:30'),
+(29, 10, '2025.01.19 19:30', '2025.01.19 21:00'),
+(30, 10, '2025.01.19 21:00', '2025.01.19 22:30'),
+(31, 11, '2025.01.17 18:00', '2025.01.17 19:30'),
+(32, 11, '2025.01.17 19:30', '2025.01.17 21:00'),
+(33, 11, '2025.01.17 21:00', '2025.01.17 22:30'),
+(34, 12, '2025.01.18 18:00', '2025.01.18 19:30'),
+(35, 12, '2025.01.18 19:30', '2025.01.18 21:00'),
+(36, 12, '2025.01.18 21:00', '2025.01.18 22:30'),
+(37, 13, '2025.01.28 18:00', '2025.01.28 19:30'),
+(38, 13, '2025.01.28 19:30', '2025.01.28 21:00'),
+(39, 13, '2025.01.28 21:00', '2025.01.28 22:30'),
+(40, 14, '2025.01.16 18:00', '2025.01.16 19:30'),
+(41, 14, '2025.01.16 19:30', '2025.01.16 21:00'),
+(42, 14, '2025.01.16 21:00', '2025.01.16 22:30'),
+(43, 15, '2025.01.23 18:00', '2025.01.23 19:30'),
+(44, 15, '2025.01.23 19:30', '2025.01.23 21:00'),
+(45, 15, '2025.01.23 21:00', '2025.01.23 22:30'),
+(46, 16, '2025.01.19 18:00', '2025.01.19 19:30'),
+(47, 16, '2025.01.19 19:30', '2025.01.19 21:00'),
+(48, 16, '2025.01.19 21:00', '2025.01.19 22:30'),
+(49, 17, '2025.01.18 18:00', '2025.01.18 19:30'),
+(50, 17, '2025.01.18 19:30', '2025.01.18 21:00'),
+(51, 17, '2025.01.18 21:00', '2025.01.18 22:30'),
+(52, 18, '2025.01.21 18:00', '2025.01.21 19:30'),
+(53, 18, '2025.01.21 19:30', '2025.01.21 21:00'),
+(54, 18, '2025.01.21 21:00', '2025.01.21 22:30'),
+(55, 19, '2025.01.15 18:00', '2025.01.15 19:30'),
+(56, 19, '2025.01.15 19:30', '2025.01.15 21:00'),
+(57, 19, '2025.01.15 21:00', '2025.01.15 22:30'),
+(58, 20, '2025.01.27 18:00', '2025.01.27 19:30'),
+(59, 20, '2025.01.27 19:30', '2025.01.27 21:00'),
+(60, 20, '2025.01.27 21:00', '2025.01.27 22:30'),
+(61, 21, '2025.01.26 18:00', '2025.01.26 19:30'),
+(62, 21, '2025.01.26 19:30', '2025.01.26 21:00'),
+(63, 21, '2025.01.26 21:00', '2025.01.26 22:30'),
+(64, 22, '2025.01.23 18:00', '2025.01.23 19:30'),
+(65, 22, '2025.01.23 19:30', '2025.01.23 21:00'),
+(66, 22, '2025.01.23 21:00', '2025.01.23 22:30'),
+(67, 23, '2025.01.22 18:00', '2025.01.22 19:30'),
+(68, 23, '2025.01.22 19:30', '2025.01.22 21:00'),
+(69, 23, '2025.01.22 21:00', '2025.01.22 22:30'),
+(70, 24, '2025.01.16 18:00', '2025.01.16 19:30'),
+(71, 24, '2025.01.16 19:30', '2025.01.16 21:00'),
+(72, 24, '2025.01.16 21:00', '2025.01.16 22:30'),
+(73, 25, '2025.01.24 18:00', '2025.01.24 19:30'),
+(74, 25, '2025.01.24 19:30', '2025.01.24 21:00'),
+(75, 25, '2025.01.24 21:00', '2025.01.24 22:30'),
+(76, 26, '2025.01.18 18:00', '2025.01.18 19:30'),
+(77, 26, '2025.01.18 19:30', '2025.01.18 21:00'),
+(78, 26, '2025.01.18 21:00', '2025.01.18 22:30'),
+(79, 27, '2025.01.17 18:00', '2025.01.17 19:30'),
+(80, 27, '2025.01.17 19:30', '2025.01.17 21:00'),
+(81, 27, '2025.01.17 21:00', '2025.01.17 22:30'),
+(82, 28, '2025.01.20 18:00', '2025.01.20 19:30'),
+(83, 28, '2025.01.20 19:30', '2025.01.20 21:00'),
+(84, 28, '2025.01.20 21:00', '2025.01.20 22:30'),
+(85, 29, '2025.01.22 18:00', '2025.01.22 19:30'),
+(86, 29, '2025.01.22 19:30', '2025.01.22 21:00'),
+(87, 29, '2025.01.22 21:00', '2025.01.22 22:30'),
+(88, 30, '2025.01.27 18:00', '2025.01.27 19:30'),
+(89, 30, '2025.01.27 19:30', '2025.01.27 21:00'),
+(90, 30, '2025.01.27 21:00', '2025.01.27 22:30'),
+(91, 31, '2025.01.26 18:00', '2025.01.26 19:30'),
+(92, 31, '2025.01.26 19:30', '2025.01.26 21:00'),
+(93, 31, '2025.01.26 21:00', '2025.01.26 22:30'),
+(94, 32, '2025.01.21 18:00', '2025.01.21 19:30'),
+(95, 32, '2025.01.21 19:30', '2025.01.21 21:00'),
+(96, 32, '2025.01.21 21:00', '2025.01.21 22:30'),
+(97, 33, '2025.01.24 18:00', '2025.01.24 19:30'),
+(98, 33, '2025.01.24 19:30', '2025.01.24 21:00'),
+(99, 33, '2025.01.24 21:00', '2025.01.24 22:30'),
+(100, 34, '2025.01.19 18:00', '2025.01.19 19:30'),
+(101, 34, '2025.01.19 19:30', '2025.01.19 21:00'),
+(102, 34, '2025.01.19 21:00', '2025.01.19 22:30'),
+(103, 35, '2025.01.28 18:00', '2025.01.28 19:30'),
+(104, 35, '2025.01.28 19:30', '2025.01.28 21:00'),
+(105, 35, '2025.01.28 21:00', '2025.01.28 22:30'),
+(106, 36, '2025.01.25 18:00', '2025.01.25 19:30'),
+(107, 36, '2025.01.25 19:30', '2025.01.25 21:00'),
+(108, 36, '2025.01.25 21:00', '2025.01.25 22:30'),
+(109, 37, '2025.01.26 18:00', '2025.01.26 19:30'),
+(110, 37, '2025.01.26 19:30', '2025.01.26 21:00'),
+(111, 37, '2025.01.26 21:00', '2025.01.26 22:30'),
+(112, 38, '2025.01.23 18:00', '2025.01.23 19:30'),
+(113, 38, '2025.01.23 19:30', '2025.01.23 21:00'),
+(114, 38, '2025.01.23 21:00', '2025.01.23 22:30'),
+(115, 39, '2025.01.17 18:00', '2025.01.17 19:30'),
+(116, 39, '2025.01.17 19:30', '2025.01.17 21:00'),
+(117, 39, '2025.01.17 21:00', '2025.01.17 22:30'),
+(118, 40, '2025.01.18 18:00', '2025.01.18 19:30'),
+(119, 40, '2025.01.18 19:30', '2025.01.18 21:00'),
+(120, 40, '2025.01.18 21:00', '2025.01.18 22:30') [22007-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:518)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:88)
+	at org.h2.value.Value.convertToTimestamp(Value.java:2006)
+	at org.h2.value.Value.convertTo(Value.java:1179)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1118)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:406)
+	at org.h2.table.Table.convertInsertRow(Table.java:963)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:304)
+	at org.h2.command.Command.executeUpdate(Command.java:248)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp.query(WebApp.java:1118)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+Caused by: java.lang.NumberFormatException: Error at index 4 in: "2025.0"
+	at java.base/java.lang.NumberFormatException.forCharSequence(NumberFormatException.java:83)
+	at java.base/java.lang.Integer.parseInt(Integer.java:663)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.util.DateTimeUtils.parseTimestamp(DateTimeUtils.java:338)
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:86)
+	... 55 more
+2025-12-11 00:12:38.294802+01:00 jdbc[18]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "LOCATION_ID" not found; SQL statement:
+INSERT INTO OPEN_MIC_SLOT (ID, LOCATION_ID, START_TIME, END_TIME, BOOKED, BAND_ID) VALUES
+(1, 1, '2025-01-20 18:00:00', '2025-01-20 19:30:00', FALSE, NULL),
+(2, 1, '2025-01-20 19:30:00', '2025-01-20 21:00:00', FALSE, NULL),
+(3, 1, '2025-01-20 21:00:00', '2025-01-20 22:30:00', FALSE, NULL),
+(4, 2, '2025-01-25 18:00:00', '2025-01-25 19:30:00', FALSE, NULL),
+(5, 2, '2025-01-25 19:30:00', '2025-01-25 21:00:00', FALSE, NULL),
+(6, 2, '2025-01-25 21:00:00', '2025-01-25 22:30:00', FALSE, NULL),
+(7, 3, '2025-01-15 18:00:00', '2025-01-15 19:30:00', FALSE, NULL),
+(8, 3, '2025-01-15 19:30:00', '2025-01-15 21:00:00', FALSE, NULL),
+(9, 3, '2025-01-15 21:00:00', '2025-01-15 22:30:00', FALSE, NULL),
+(10, 4, '2025-01-23 18:00:00', '2025-01-23 19:30:00', FALSE, NULL),
+(11, 4, '2025-01-23 19:30:00', '2025-01-23 21:00:00', FALSE, NULL),
+(12, 4, '2025-01-23 21:00:00', '2025-01-23 22:30:00', FALSE, NULL),
+(13, 5, '2025-01-22 18:00:00', '2025-01-22 19:30:00', FALSE, NULL),
+(14, 5, '2025-01-22 19:30:00', '2025-01-22 21:00:00', FALSE, NULL),
+(15, 5, '2025-01-22 21:00:00', '2025-01-22 22:30:00', FALSE, NULL),
+(16, 6, '2025-01-21 18:00:00', '2025-01-21 19:30:00', FALSE, NULL),
+(17, 6, '2025-01-21 19:30:00', '2025-01-21 21:00:00', FALSE, NULL),
+(18, 6, '2025-01-21 21:00:00', '2025-01-21 22:30:00', FALSE, NULL),
+(19, 7, '2025-01-16 18:00:00', '2025-01-16 19:30:00', FALSE, NULL),
+(20, 7, '2025-01-16 19:30:00', '2025-01-16 21:00:00', FALSE, NULL),
+(21, 7, '2025-01-16 21:00:00', '2025-01-16 22:30:00', FALSE, NULL),
+(22, 8, '2025-01-26 18:00:00', '2025-01-26 19:30:00', FALSE, NULL),
+(23, 8, '2025-01-26 19:30:00', '2025-01-26 21:00:00', FALSE, NULL),
+(24, 8, '2025-01-26 21:00:00', '2025-01-26 22:30:00', FALSE, NULL),
+(25, 9, '2025-01-27 18:00:00', '2025-01-27 19:30:00', FALSE, NULL),
+(26, 9, '2025-01-27 19:30:00', '2025-01-27 21:00:00', FALSE, NULL),
+(27, 9, '2025-01-27 21:00:00', '2025-01-27 22:30:00', FALSE, NULL),
+(28, 10, '2025-01-19 18:00:00', '2025-01-19 19:30:00', FALSE, NULL),
+(29, 10, '2025-01-19 19:30:00', '2025-01-19 21:00:00', FALSE, NULL),
+(30, 10, '2025-01-19 21:00:00', '2025-01-19 22:30:00', FALSE, NULL),
+(31, 11, '2025-01-17 18:00:00', '2025-01-17 19:30:00', FALSE, NULL),
+(32, 11, '2025-01-17 19:30:00', '2025-01-17 21:00:00', FALSE, NULL),
+(33, 11, '2025-01-17 21:00:00', '2025-01-17 22:30:00', FALSE, NULL),
+(34, 12, '2025-01-18 18:00:00', '2025-01-18 19:30:00', FALSE, NULL),
+(35, 12, '2025-01-18 19:30:00', '2025-01-18 21:00:00', FALSE, NULL),
+(36, 12, '2025-01-18 21:00:00', '2025-01-18 22:30:00', FALSE, NULL),
+(37, 13, '2025-01-28 18:00:00', '2025-01-28 19:30:00', FALSE, NULL),
+(38, 13, '2025-01-28 19:30:00', '2025-01-28 21:00:00', FALSE, NULL),
+(39, 13, '2025-01-28 21:00:00', '2025-01-28 22:30:00', FALSE, NULL),
+(40, 14, '2025-01-16 18:00:00', '2025-01-16 19:30:00', FALSE, NULL) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp.query(WebApp.java:1118)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
 2025-12-10 23:53:05.927970+01:00 database: close
 org.h2.message.DbException: IO Exception: "Closing" [90028-232]
 	at org.h2.message.DbException.get(DbException.java:212)

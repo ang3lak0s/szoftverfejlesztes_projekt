@@ -8,7 +8,7 @@ export default function BandClientPage({ onBack }) {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const loadSlots = async () => {
+    const loadSlots = async () => {
     try {
       setLoading(true);
       setError("");
@@ -103,7 +103,7 @@ export default function BandClientPage({ onBack }) {
         >
           <thead>
           <tr style={{ backgroundColor: "#333" }}>
-            <th>ID</th>
+            <th>Hely neve</th>
             <th>Kezdés</th>
             <th>Befejezés</th>
             <th>Foglalt?</th>
@@ -125,7 +125,7 @@ export default function BandClientPage({ onBack }) {
                       (e.currentTarget.style.backgroundColor = s.booked ? "#444" : "#222")
                   }
               >
-                <td>{s.id}</td>
+                <td>{s.locationName}</td>
                 <td>{s.startTime}</td>
                 <td>{s.endTime}</td>
                 <td>{s.booked ? "Igen" : "Nem"}</td>
