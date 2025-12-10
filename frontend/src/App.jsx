@@ -69,15 +69,17 @@ export default function App() {
     return (
       <div
         style={{
+          width: "100%",
           minHeight: "100vh",
           background: "#111",
           color: "white",
-          display: "flex",
-          flexDirection: "column",
+            display: "block",
+            boxSizing: "border-box",
         }}
       >
         <header
           style={{
+            width: "100%",
             display: "flex",
             borderBottom: "1px solid #333",
             padding: "16px",
@@ -85,7 +87,7 @@ export default function App() {
             gap: "16px",
           }}
         >
-          <div style={{ fontWeight: "bold" }}>Belépés</div>
+          <div style={{ fontWeight: "bold" }}>BÁLA</div>
 
           <div style={{ flex: 1, textAlign: "center", fontSize: "24px" }}>
             Logó helye
@@ -99,6 +101,7 @@ export default function App() {
 
         <main
           style={{
+            width: "100%",
             flex: 1,
             display: "flex",
             flexDirection: "column",
@@ -193,6 +196,7 @@ export default function App() {
     return (
       <div
         style={{
+          width: "100%",
           minHeight: "100vh",
           background: "#111",
           color: "white",
