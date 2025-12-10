@@ -68,7 +68,7 @@ export default function BandClientPage({ onBack }) {
                 padding: "8px 16px",
                 borderRadius: "8px",
                 border: "none",
-                color: "white",
+                //color: "white",
                 cursor: "pointer",
                 marginBottom: "20px",
                 display: "inline-block",

@@ -78,7 +78,7 @@ export default function LocationClientPage({ onBack }) {
                     padding: "8px 16px",
                     borderRadius: "8px",
                     border: "none",
-                    color: "white",
+                    //color: "white",
                     cursor: "pointer",
                     display: "inline-block",
                     position: "absolute",

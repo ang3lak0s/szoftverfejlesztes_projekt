@@ -1206,3 +1206,235 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Benedek
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 58 more
+2025-12-10 21:57:45.334190+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "BANDNAME" not found; SQL statement:
+INSERT INTO BAND (bandName, playedGenre, phoneNum, email, pricePerHour, acceptsPercentage) VALUES
+('Midnight Echo', 'Rock', '06201234501', 'midnightecho@gmail.com', 45000, TRUE),
+('Silver Strings', 'Pop', '06201234502', 'silverstrings@mail.com', 60000, FALSE),
+('Jazz Horizon', 'Jazz', '06201234503', 'jazzhorizon@gmail.com', 52000, TRUE),
+('Electro Pulse', 'Electronic', '06201234504', 'electropulse@mail.com', 70000, FALSE),
+('Golden Harp', 'Folk', '06201234505', 'goldenharp@gmail.com', 30000, TRUE),
+('Blue Ember', 'Blues', '06201234506', 'blueember@mail.com', 48000, TRUE),
+('Crimson Line', 'Rock', '06201234507', 'crimsonline@gmail.com', 55000, FALSE),
+('Urban Nights', 'Hip-Hop', '06201234508', 'urbannights@mail.com', 65000, TRUE),
+('Velvet Sky', 'Indie', '06201234509', 'velvetsky@gmail.com', 40000, FALSE),
+('Thunder Crow', 'Metal', '06201234510', 'thundercrow@mail.com', 75000, TRUE),
+
+('Neon Valley', 'Electronic', '06201234511', 'neonvalley@gmail.com', 72000, TRUE),
+('Rusty Roots', 'Country', '06201234512', 'rustyroots@mail.com', 35000, FALSE),
+('Moonlit Waves', 'Ambient', '06201234513', 'moonlitwaves@gmail.com', 45000, TRUE),
+('Scarlet Motion', 'Pop', '06201234514', 'scarletmotion@mail.com', 58000, FALSE),
+('Desert Echoes', 'World', '06201234515', 'desertechoes@gmail.com', 39000, TRUE),
+('Black Lantern', 'Metal', '06201234516', 'blacklantern@mail.com', 80000, FALSE),
+('Sky Arcadia', 'Indie', '06201234517', 'skyarcadia@gmail.com', 47000, TRUE),
+('Golden Pulse', 'Funk', '06201234518', 'goldenpulse@mail.com', 53000, TRUE),
+('Stone Garden', 'Rock', '06201234519', 'stonegarden@gmail.com', 56000, FALSE),
+('Horizon Shift', 'Electronic', '06201234520', 'horizonshift@mail.com', 69000, TRUE),
+
+('Riverlines', 'Folk', '06201234521', 'riverlines@gmail.com', 32000, FALSE),
+('Silent Aura', 'Ambient', '06201234522', 'silentaura@mail.com', 41000, TRUE),
+('Wolfgang Crew', 'Rock', '06201234523', 'wolfgangcrew@gmail.com', 50000, TRUE),
+('Crystal Echo', 'Pop', '06201234524', 'crystalecho@mail.com', 54000, FALSE),
+('Red Horizon', 'Electronic', '06201234525', 'redhorizon@gmail.com', 70000, TRUE),
+('Misty Hollow', 'Country', '06201234526', 'mistyhollow@mail.com', 36000, TRUE),
+('Emerald Flow', 'Jazz', '06201234527', 'emeraldflow@gmail.com', 60000, FALSE),
+('Obsidian Wing', 'Metal', '06201234528', 'obsidianwing@mail.com', 82000, TRUE),
+('Night Voyage', 'Indie', '06201234529', 'nightvoyage@gmail.com', 44000, FALSE),
+('Sapphire Beat', 'Funk', '06201234530', 'sapphirebeat@mail.com', 51000, TRUE),
+
+('Autumn Ember', 'Folk', '06201234531', 'autumnember@gmail.com', 33000, TRUE),
+('Silent Rift', 'Electronic', '06201234532', 'silentrift@mail.com', 71000, FALSE),
+('Northern Flow', 'Rock', '06201234533', 'northernflow@gmail.com', 59000, TRUE),
+('Crimson River', 'Blues', '06201234534', 'crimsonriver@mail.com', 47000, FALSE),
+('Ruby Station', 'Pop', '06201234535', 'rubystation@gmail.com', 56000, TRUE),
+('Nightfall Birds', 'Indie', '06201234536', 'nightfallbirds@mail.com', 43000, FALSE),
+('Echo Vector', 'Electronic', '06201234537', 'echovector@gmail.com', 72000, TRUE),
+('Dusty Trail', 'Country', '06201234538', 'dustytrail@mail.com', 34000, TRUE),
+('Iron Sparks', 'Metal', '06201234539', 'ironsparks@gmail.com', 78000, FALSE),
+('Golden Era', 'Jazz', '06201234540', 'goldenera@mail.com', 58000, TRUE),
+
+('Ocean Drive', 'Pop', '06201234541', 'oceandrive@gmail.com', 50000, FALSE),
+('Silver Moon', 'Folk', '06201234542', 'silvermoon@mail.com', 31000, TRUE),
+('Shadow Pulse', 'Electronic', '06201234543', 'shadowpulse@gmail.com', 73000, TRUE),
+('Bronze Echo', 'Rock', '06201234544', 'bronzeecho@mail.com', 55000, FALSE),
+('Urban Pulse', 'Hip-Hop', '06201234545', 'urbanpulse@gmail.com', 64000, TRUE),
+('Twilight Brass', 'Jazz', '06201234546', 'twilightbrass@mail.com', 57000, TRUE),
+('Fireheart Trio', 'Rock', '06201234547', 'firehearttrio@gmail.com', 52000, FALSE),
+('Amber Whispers', 'Indie', '06201234548', 'amberwhispers@mail.com', 40000, TRUE),
+('Stormbreak', 'Metal', '06201234549', 'stormbreak@gmail.com', 81000, TRUE),
+('Violet Echoes', 'Ambient', '06201234550', 'violetechoes@mail.com', 42000, FALSE) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp.query(WebApp.java:1118)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
+2025-12-10 22:00:30.941667+01:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "ACCEPTS_PERCENTAGI" not found; SQL statement:
+INSERT INTO BAND (BAND_NAME, PLAYED_GENRE, PHONE_NUM, EMAIL, PRICE_PER_HOUR, ACCEPTS_PERCENTAGI) VALUES
+('Midnight Echo', 'Rock', '06201234501', 'midnightecho@gmail.com', 45000, TRUE),
+('Silver Strings', 'Pop', '06201234502', 'silverstrings@mail.com', 60000, FALSE),
+('Jazz Horizon', 'Jazz', '06201234503', 'jazzhorizon@gmail.com', 52000, TRUE),
+('Electro Pulse', 'Electronic', '06201234504', 'electropulse@mail.com', 70000, FALSE),
+('Golden Harp', 'Folk', '06201234505', 'goldenharp@gmail.com', 30000, TRUE),
+('Blue Ember', 'Blues', '06201234506', 'blueember@mail.com', 48000, TRUE),
+('Crimson Line', 'Rock', '06201234507', 'crimsonline@gmail.com', 55000, FALSE),
+('Urban Nights', 'Hip-Hop', '06201234508', 'urbannights@mail.com', 65000, TRUE),
+('Velvet Sky', 'Indie', '06201234509', 'velvetsky@gmail.com', 40000, FALSE),
+('Thunder Crow', 'Metal', '06201234510', 'thundercrow@mail.com', 75000, TRUE),
+
+('Neon Valley', 'Electronic', '06201234511', 'neonvalley@gmail.com', 72000, TRUE),
+('Rusty Roots', 'Country', '06201234512', 'rustyroots@mail.com', 35000, FALSE),
+('Moonlit Waves', 'Ambient', '06201234513', 'moonlitwaves@gmail.com', 45000, TRUE),
+('Scarlet Motion', 'Pop', '06201234514', 'scarletmotion@mail.com', 58000, FALSE),
+('Desert Echoes', 'World', '06201234515', 'desertechoes@gmail.com', 39000, TRUE),
+('Black Lantern', 'Metal', '06201234516', 'blacklantern@mail.com', 80000, FALSE),
+('Sky Arcadia', 'Indie', '06201234517', 'skyarcadia@gmail.com', 47000, TRUE),
+('Golden Pulse', 'Funk', '06201234518', 'goldenpulse@mail.com', 53000, TRUE),
+('Stone Garden', 'Rock', '06201234519', 'stonegarden@gmail.com', 56000, FALSE),
+('Horizon Shift', 'Electronic', '06201234520', 'horizonshift@mail.com', 69000, TRUE),
+
+('Riverlines', 'Folk', '06201234521', 'riverlines@gmail.com', 32000, FALSE),
+('Silent Aura', 'Ambient', '06201234522', 'silentaura@mail.com', 41000, TRUE),
+('Wolfgang Crew', 'Rock', '06201234523', 'wolfgangcrew@gmail.com', 50000, TRUE),
+('Crystal Echo', 'Pop', '06201234524', 'crystalecho@mail.com', 54000, FALSE),
+('Red Horizon', 'Electronic', '06201234525', 'redhorizon@gmail.com', 70000, TRUE),
+('Misty Hollow', 'Country', '06201234526', 'mistyhollow@mail.com', 36000, TRUE),
+('Emerald Flow', 'Jazz', '06201234527', 'emeraldflow@gmail.com', 60000, FALSE),
+('Obsidian Wing', 'Metal', '06201234528', 'obsidianwing@mail.com', 82000, TRUE),
+('Night Voyage', 'Indie', '06201234529', 'nightvoyage@gmail.com', 44000, FALSE),
+('Sapphire Beat', 'Funk', '06201234530', 'sapphirebeat@mail.com', 51000, TRUE),
+
+('Autumn Ember', 'Folk', '06201234531', 'autumnember@gmail.com', 33000, TRUE),
+('Silent Rift', 'Electronic', '06201234532', 'silentrift@mail.com', 71000, FALSE),
+('Northern Flow', 'Rock', '06201234533', 'northernflow@gmail.com', 59000, TRUE),
+('Crimson River', 'Blues', '06201234534', 'crimsonriver@mail.com', 47000, FALSE),
+('Ruby Station', 'Pop', '06201234535', 'rubystation@gmail.com', 56000, TRUE),
+('Nightfall Birds', 'Indie', '06201234536', 'nightfallbirds@mail.com', 43000, FALSE),
+('Echo Vector', 'Electronic', '06201234537', 'echovector@gmail.com', 72000, TRUE),
+('Dusty Trail', 'Country', '06201234538', 'dustytrail@mail.com', 34000, TRUE),
+('Iron Sparks', 'Metal', '06201234539', 'ironsparks@gmail.com', 78000, FALSE),
+('Golden Era', 'Jazz', '06201234540', 'goldenera@mail.com', 58000, TRUE),
+
+('Ocean Drive', 'Pop', '06201234541', 'oceandrive@gmail.com', 50000, FALSE),
+('Silver Moon', 'Folk', '06201234542', 'silvermoon@mail.com', 31000, TRUE),
+('Shadow Pulse', 'Electronic', '06201234543', 'shadowpulse@gmail.com', 73000, TRUE),
+('Bronze Echo', 'Rock', '06201234544', 'bronzeecho@mail.com', 55000, FALSE),
+('Urban Pulse', 'Hip-Hop', '06201234545', 'urbanpulse@gmail.com', 64000, TRUE),
+('Twilight Brass', 'Jazz', '06201234546', 'twilightbrass@mail.com', 57000, TRUE),
+('Fireheart Trio', 'Rock', '06201234547', 'firehearttrio@gmail.com', 52000, FALSE),
+('Amber Whispers', 'Indie', '06201234548', 'amberwhispers@mail.com', 40000, TRUE),
+('Stormbreak', 'Metal', '06201234549', 'stormbreak@gmail.com', 81000, TRUE),
+('Violet Echoes', 'Ambient', '06201234550', 'violetechoes@mail.com', 42000, FALSE) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.command.Parser.parseColumn(Parser.java:1171)
+	at org.h2.command.Parser.parseColumnList(Parser.java:1156)
+	at org.h2.command.Parser.parseInsert(Parser.java:1530)
+	at org.h2.command.Parser.parsePrepared(Parser.java:698)
+	at org.h2.command.Parser.parse(Parser.java:581)
+	at org.h2.command.Parser.parse(Parser.java:556)
+	at org.h2.command.Parser.prepareCommand(Parser.java:484)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1344)
+	at org.h2.server.web.WebApp.query(WebApp.java:1142)
+	at org.h2.server.web.WebApp.query(WebApp.java:1118)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1570)
